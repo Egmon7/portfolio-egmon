@@ -12,21 +12,6 @@ Il a pour objectif de présenter mes compétences en développement web.
 - Tailwind CSS
 - Git & GitHub
 
----
-
-## Structure du projet
-
-Projet-kadea1/
-│
-├── index.html
-├── README.md
-│
-└── images/
-    ├── auteur/
-    ├── desktop/
-    ├── icon/
-    └── mobile/
-
 --- 
 
 ##  Objectifs du projet

@@ -1,17 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"/>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"/>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <title>Portfolio Prospere Engeba</title>
-</head>
-<body>
-    
-</body>
+        <script src="https://cdn.tailwindcss.com"></script>
+        
+        <title>Portfolio Prospere Engeba</title>
+    </head>
+    <body class="min-h-dvh bg-neutral-100 pt-8 text-neutral-900 antialiased sm:pt-10">
+       <header class="mx-auto w-full max-w-[920px] border-b border-neutral-300 bg-white ring-1 ring-neutral-300">
+            <div class="relative">
+                <img src="./images/desktop/images421.jpg" alt="image montagne" class="block h-80 w-full object-cover object-center grayscale sm:h-96" loading="lazy"/>
+            </div>
+
+            <div class="relative px-6 pb-6 pt-0 sm:px-10 sm:pb-8">
+            
+                <div class="-mt-16 flex flex-col items-center gap-6 sm:-mt-20 sm:flex-row sm:items-end sm:justify-between">
+            
+                    <div class="flex flex-col items-center sm:items-start">
+                        <div class="h-24 w-24 overflow-hidden rounded-full ring-2 ring-neutral-300 sm:h-28 sm:w-28">
+                            <img src="./images/auteur/egmon.jpg" alt="Profil" class="h-full w-full object-cover" loading="lazy" />
+                        </div>
+
+                        <div class="mt-5 text-center sm:text-left">
+                            <div class="text-sm font-semibold tracking-tight text-neutral-900 sm:text-base">PROSPERE ENGEBA</div>
+                            <div class="mt-3 text-sm font-medium text-indigo-700">Développeur web junior</div>
+                            <div class="mt-4 flex items-center justify-center gap-3 text-sm text-neutral-900 sm:justify-start">
+                                <img src="./images/icon/localisation.png" alt="" class="h-5 w-5" />
+                                <span>Kinshasa , RDC</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Icônes -->
+                    <div class="flex flex-col items-center gap-4 pb-1 sm:flex-row sm:items-center sm:gap-6 sm:pb-3">
+                            <div class="flex items-center gap-4 sm:gap-6">
+                                    <a href="#" class="grid h-11 w-11 place-items-center rounded-full border border-neutral-300 transition hover:-translate-y-0.5 hover:bg-neutral-100 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40 sm:h-12 sm:w-12" aria-label="WhatsApp">
+                                        <img src="./images/icon/whatsapp.png" alt="icon whatsapp" class="h-6 w-6" />
+                                    </a>
+                                    <a href="#" class="grid h-11 w-11 place-items-center rounded-full border border-neutral-300 transition hover:-translate-y-0.5 hover:bg-neutral-100 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40 sm:h-12 sm:w-12" aria-label="Facebook">
+                                        <img src="./images/icon/facebook.png" alt="icon facebook" class="h-6 w-6" />
+                                    </a>
+                                    <a href="#" class="grid h-11 w-11 place-items-center rounded-full border border-neutral-300 transition hover:-translate-y-0.5 hover:bg-neutral-100 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40 sm:h-12 sm:w-12" aria-label="Instagram">
+                                        <img src="./images/icon/instagram.png" alt="icon instagram" class="h-6 w-6" />
+                                    </a>
+                            </div>
+
+                            <!-- Bouton contact -->
+                            <a href="#contact"
+                            class="group inline-flex rounded-full bg-gradient-to-r from-[#9A3A98] to-[#F3CA4D] p-[2px] transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40">
+                            <span class="inline-flex rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition group-hover:bg-neutral-900">
+                                Contactez moi
+                            </span>
+                            </a>
+                    </div>
+                </div>
+            </div>
+    </header>
+    </body>
 </html>

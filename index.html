@@ -1,258 +1,309 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="fr">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"/>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Portfolio — Prospere Engeba</title>
 
-        <script src="https://cdn.tailwindcss.com"></script>
-        
-        <title>Portfolio Prospere Engeba</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+      />
+
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              fontFamily: {
+                sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              },
+            },
+          },
+        };
+      </script>
     </head>
-    <body class="min-h-dvh bg-neutral-100 pt-8 text-neutral-900 antialiased sm:pt-10">
-        <header class="mx-auto w-full max-w-[920px] border-b border-neutral-300 bg-white ring-1 ring-neutral-300">
-                <div class="relative">
-                        <img src="./images/desktop/images421.jpg" alt="image montagne" class="block h-80 w-full object-cover object-center grayscale sm:h-96" loading="lazy"/>
+
+    <body class="min-h-dvh bg-neutral-100 px-3 py-8 font-sans text-neutral-900 antialiased sm:px-6 sm:py-10">
+      <header class="mx-auto w-full max-w-[960px] border-b border-neutral-300 bg-white ring-1 ring-neutral-300">
+        <div class="relative">
+          <img
+            src="./images/desktop/banner1.jpg"
+            alt="image_banniere"
+            class="block h-44 w-full object-cover object-center grayscale sm:h-56 md:h-64 lg:h-72"
+            decoding="async" fetchpriority="high" loading="eager"/>
+        </div>
+
+        <div class="relative px-5 pb-6 pt-0 sm:px-10 sm:pb-8 md:pb-10">
+          <div class="-mt-12 flex flex-col items-center gap-5 sm:-mt-16 sm:flex-row sm:items-start sm:justify-between sm:gap-8 md:-mt-20 md:gap-10">
+            <div class="flex w-full max-w-md flex-col items-center sm:max-w-none sm:items-start">
+              <div class="h-24 w-24 shrink-0 overflow-hidden rounded-full ring-4 ring-white shadow-md sm:h-28 sm:w-28 sm:ring-[5px]">
+                <img src="./images/auteur/egmon.jpg" alt="Profil" class="h-full w-full object-cover" loading="lazy" />
+              </div>
+
+              <div class="mt-4 w-full text-center sm:mt-5 sm:text-left">
+                <div class="text-2xl font-semibold tracking-tight text-neutral-950">PROSPERE ENGEBA</div>
+                <div class="mt-2 text-sm font-semibold text-indigo-700 sm:text-base">Développeur web junior</div>
+                <div class="mt-2 flex items-center justify-center gap-2 text-xs text-neutral-600 sm:justify-start sm:text-sm">
+                  <img src="./images/icon/localisation.png" alt="" class="h-3.5 w-3.5 shrink-0 opacity-80 sm:h-4 sm:w-4" />
+                  <span>Kinshasa , RDC</span>
                 </div>
+              </div>
+            </div>
 
-                <div class="relative px-6 pb-6 pt-0 sm:px-10 sm:pb-8">
-                
-                    <div class="-mt-16 flex flex-col items-center gap-6 sm:-mt-20 sm:flex-row sm:items-end sm:justify-between">
-                
-                        <div class="flex flex-col items-center sm:items-start">
-                            <div class="h-24 w-24 overflow-hidden rounded-full ring-2 ring-neutral-300 sm:h-28 sm:w-28">
-                                <img src="./images/auteur/egmon.jpg" alt="Profil" class="h-full w-full object-cover" loading="lazy" />
-                            </div>
+            <!-- Icônes + bouton -->
+            <div
+              class="mt-6 flex w-full max-w-md flex-col items-center gap-3 pb-0 sm:mt-0 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-end sm:gap-4 sm:pb-0 sm:pt-[8.25rem]"
+            >
+              <div class="flex items-center justify-center gap-2 sm:justify-end">
+                <a
+                  href="https://wa.me/243895467658"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="grid h-9 w-9 place-items-center rounded-full border border-neutral-200 bg-white transition hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40"
+                  aria-label="WhatsApp"
+                >
+                  <img src="./images/icon/whatsapp.png" alt="" class="h-3.5 w-3.5 object-contain" />
+                </a>
+                <a
+                  href="https://www.facebook.com/prospere.egmon"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="grid h-9 w-9 place-items-center rounded-full border border-neutral-200 bg-white transition hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40"
+                  aria-label="Facebook — Prospere Egmon"
+                >
+                  <img src="./images/icon/facebook.png" alt="" class="h-3.5 w-3.5 object-contain" />
+                </a>
+                <a
+                  href="https://www.instagram.com/prospere_egmon/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="grid h-9 w-9 place-items-center rounded-full border border-neutral-200 bg-white transition hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40"
+                  aria-label="Instagram — prospere_egmon"
+                >
+                  <img src="./images/icon/instagram.png" alt="" class="h-3.5 w-3.5 object-contain" />
+                </a>
+              </div>
 
-                            <div class="mt-5 text-center sm:text-left">
-                                <div class="text-sm font-semibold tracking-tight text-neutral-900 sm:text-base">PROSPERE ENGEBA</div>
-                                <div class="mt-3 text-sm font-medium text-indigo-700">Développeur web junior</div>
-                                <div class="mt-4 flex items-center justify-center gap-3 text-sm text-neutral-900 sm:justify-start">
-                                    <img src="./images/icon/localisation.png" alt="icon localisation" class="h-5 w-5" />
-                                    <span>Kinshasa , RDC</span>
-                                </div>
-                            </div>
-                        </div>
+              <a
+                href="#contact"
+                class="group inline-flex rounded-full bg-gradient-to-r from-[#9A3A98] to-[#F3CA4D] p-[2px] transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40"
+              >
+                <span
+                  class="inline-flex rounded-full bg-black px-5 py-2.5 text-sm font-semibold text-white transition group-hover:bg-neutral-900 sm:px-6 sm:py-3"
+                >
+                  Contactez moi
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
 
-                        <!-- Icônes -->
-                        <div class="flex flex-col items-center gap-4 pb-1 sm:flex-row sm:items-center sm:gap-6 sm:pb-3">
-                            <div class="flex items-center gap-3 sm:gap-4">
-                                <a href="https://wa.me/243895467658" target="_blank" rel="noopener noreferrer" class="grid h-9 w-9 place-items-center rounded-full border border-neutral-300 transition hover:-translate-y-0.5 hover:bg-neutral-100 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40 sm:h-10 sm:w-10" aria-label="WhatsApp - Prospere Egmon">
-                                    <img src="./images/icon/whatsapp.png" alt="icon whatsapp" class="h-4 w-4 object-contain sm:h-[1.125rem] sm:w-[1.125rem]" />
-                                </a>
-                                <a href="https://www.facebook.com/prospere.egmon" target="_blank" rel="noopener noreferrer" class="grid h-9 w-9 place-items-center rounded-full border border-neutral-300 transition hover:-translate-y-0.5 hover:bg-neutral-100 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40 sm:h-10 sm:w-10" aria-label="Facebook -  Prospere Egmon">
-                                    <img src="./images/icon/facebook.png" alt="icon facebook" class="h-4 w-4 object-contain sm:h-[1.125rem] sm:w-[1.125rem]" />
-                                </a>
-                                <a href="https://www.instagram.com/prospere_egmon/" target="_blank" rel="noopener noreferrer" class="grid h-9 w-9 place-items-center rounded-full border border-neutral-300 transition hover:-translate-y-0.5 hover:bg-neutral-100 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40 sm:h-10 sm:w-10" aria-label="Instagram - Prospere Egmon">
-                                    <img src="./images/icon/instagram.png" alt="icon instagram" class="h-4 w-4object-contain sm:h-[1.125rem] sm:w-[1.125rem]" />
-                                </a>
-                            </div>
+      <main class="mx-auto mt-8 w-full max-w-[960px] space-y-8 sm:mt-10 sm:space-y-10">
+        <!-- A propos + Compétences -->
+        <section class="bg-white ring-1 ring-neutral-300 px-6 py-12 sm:px-12 sm:py-14 md:py-16">
+          <h2 class="text-lg font-bold tracking-tight text-neutral-950 sm:text-xl">A propos de moi</h2>
+          <p class="mt-6 max-w-3xl text-sm leading-relaxed text-neutral-800">
+            Salut, je suis Prospere Engeba développeur web junior avec une formation en ingénierie logicielle. Je conçois des applications web modernes, performantes et adaptées aux besoins réels.
+          </p>
 
-                            <!-- Bouton -->
-                            <a href="#contact" class="group inline-flex rounded-full bg-gradient-to-r from-[#9A3A98] to-[#F3CA4D] p-[2px] transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40">
-                                <span class="inline-flex rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition group-hover:bg-neutral-900">
-                                    Contactez moi
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-        </header>
+          <h3 class="mt-10 text-base font-bold tracking-tight text-neutral-900 sm:text-lg">Compétences et outils</h3>
+          <div class="mt-6 flex flex-wrap gap-3 sm:grid sm:grid-cols-4 sm:gap-x-10 sm:gap-y-4">
+            <!-- Pill réutilisable: border + rounded-full -->
+            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Html / Css</span>
+            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Tailwind</span>
+            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Bootstrap</span>
+            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Figma</span>
 
-        <main class="mx-auto mt-6 w-full max-w-[920px] space-y-6">
-            <!-- A propos + Compétences -->
-            <section class="bg-white ring-1 ring-neutral-300 px-6 py-10 sm:px-10">
-            <h2 class="text-base font-semibold">A propos de moi</h2>
+            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Django</span>
+            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Php</span>
+            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">MySQL</span>
+            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Docker</span>
+
+            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Git</span>
+            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Github</span>
+            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Vagrant</span>
+            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">AI enthusiast</span>
+          </div>
+        </section>
+
+        <!-- Projet récent -->
+        <section class="bg-white ring-1 ring-neutral-300 px-6 py-12 sm:px-12 sm:py-14 md:py-16">
+          <h2 class="text-lg font-bold tracking-tight text-neutral-950 sm:text-xl">Projet Récent</h2>
+
+          <div class="mx-auto mt-6 max-w-[620px] border border-neutral-300">
+            <div class="p-0">
+              <img
+                src="./images/desktop/home.png"
+                alt="EG-HOTEL"
+                class="w-full"
+                loading="lazy"
+              />
+            </div>
+            <div class="border-t border-neutral-300 p-6">
+              <div class="text-sm font-extrabold tracking-tight">EG-HOTEL</div>
+              <p class="mt-3 text-sm leading-relaxed text-neutral-800">
+                EgHotel est une plateforme qui permet aux hôtels de gérer leurs chambres, leurs clients et leurs revenus en toute simplicité
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Experience -->
+        <section class="bg-white ring-1 ring-neutral-300 px-6 py-12 sm:px-12 sm:py-14 md:py-16">
+          <h2 class="text-lg font-bold tracking-tight text-neutral-950 sm:text-xl">EXPERIENCE PROFESSIONNELLE</h2>
+
+          <div class="mt-6">
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <div class="text-sm font-medium">Stage Académique</div>
+                <div class="mt-3 text-sm font-semibold">SENAT, RDC</div>
+              </div>
+              <div class="inline-flex items-center gap-3 rounded-full border border-neutral-300 px-5 py-2 text-xs font-semibold text-neutral-900">
+                <span class="h-2.5 w-6 rounded-full bg-black"></span>
+                <span>MAI 2025 (1mois)</span>
+              </div>
+            </div>
+
             <p class="mt-6 max-w-3xl text-sm leading-relaxed text-neutral-800">
-                Salut, je suis Prospere Engeba développeur web junior avec une formation en ingénierie logicielle. Je conçois des applications web modernes, performantes et adaptées aux besoins réels.
+              Dans le cadre de mon stage académique au Sénat de la RDC, j’ai découvert l’environnement professionnel en échangeant avec différents agents. Ces interactions m’ont permis de mieux comprendre le fonctionnement de l’institution, tout en recueillant des informations utiles pour mon projet de mémoire de fin d’études.
             </p>
+            <ul class="mt-5 list-disc space-y-1 pl-5 text-sm text-neutral-800">
+              <li>Réalisation d’un projet : système d’enregistrement des agents (PHP &amp; MySQL)</li>
+              <li>Acquisition de notions en réseau informatique</li>
+              <li>Mise en pratique des connaissances académiques et travail collaboratif</li>
+            </ul>
 
-            <h3 class="mt-10 text-base font-semibold">Compétences et outils</h3>
-                    <div class="mt-6 flex flex-wrap gap-3 sm:grid sm:grid-cols-4 sm:gap-x-10 sm:gap-y-4">
-                    <!-- Pill réutilisable: border + rounded-full -->
-                    <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Html / Css</span>
-                    <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Tailwind</span>
-                    <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Bootstrap</span>
-                    <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Figma</span>
+            <div class="my-8 border-t border-dashed border-neutral-300"></div>
 
-                    <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Django</span>
-                    <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Php</span>
-                    <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">MySQL</span>
-                    <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Docker</span>
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <div class="mt-2 text-sm font-semibold">REGIDESO, RDC</div>
+              </div>
+              <div class="inline-flex items-center gap-3 rounded-full border border-neutral-300 px-5 py-2 text-xs font-semibold text-neutral-900">
+                <span class="h-2.5 w-6 rounded-full bg-black"></span>
+                <span>MAI 2024 (1mois)</span>
+              </div>
+            </div>
 
-                    <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Git</span>
-                    <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Github</span>
-                    <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Vagrant</span>
-                    <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">AI enthusiast</span>
-                </div>
-            </section>
+            <p class="mt-6 max-w-3xl text-sm leading-relaxed text-neutral-800">
+              Dans le cadre de mon stage académique à la REGIDESO, j’ai découvert le fonctionnement d’une entreprise publique en participant aux activités quotidiennes et en collaborant avec une équipe de stagiaires.
+            </p>
+            <ul class="mt-5 list-disc space-y-1 pl-5 text-sm text-neutral-800">
+              <li>Travail collaboratif au sein d’une équipe de stagiaires</li>
+              <li>Réalisation d’un mini projet en groupe : gestion des équipements informatiques (PHP &amp; MySQL)</li>
+              <li>Répartition des tâches et exécution de travaux pratiques.</li>
+            </ul>
+          </div>
+        </section>
 
-            <!-- Projet récent -->
-            <section class="bg-white ring-1 ring-neutral-300 px-6 py-10 sm:px-10">
-                <h2 class="text-base font-semibold">Projet Récent</h2>
+        <!-- Formation -->
+        <section class="bg-white ring-1 ring-neutral-300 px-6 py-12 sm:px-12 sm:py-14 md:py-16">
+          <h2 class="text-lg font-bold tracking-tight text-neutral-950 sm:text-xl">FORMATION</h2>
 
-                <div class="mx-auto mt-6 max-w-[620px] border border-neutral-300">
-                        <div class="p-0">
-                            <img src="./images/desktop/home.png" alt="EG-HOTEL" class="w-full" loading="lazy" />
-                        </div>
-                        <div class="border-t border-neutral-300 p-6">
-                            <div class="text-sm font-extrabold tracking-tight">EG-HOTEL</div>
-                            <p class="mt-3 text-sm leading-relaxed text-neutral-800">
-                                EgHotel est une plateforme qui permet aux hôtels de gérer leurs chambres, leurs clients et leurs revenus en toute simplicité
-                            </p>
-                        </div>
-                </div>
-            </section>
+          <div class="mt-6">
+            <div class="flex items-start justify-between gap-4">
+              <div class="text-sm font-semibold">KADEA ACADEMY</div>
+              <div class="inline-flex items-center gap-3 rounded-full border border-neutral-300 px-5 py-2 text-xs font-semibold text-neutral-900">
+                <span class="h-2.5 w-6 rounded-full bg-black"></span>
+                <span>2026 - Présent</span>
+              </div>
+            </div>
 
-            <!-- Experience -->
-            <section class="bg-white ring-1 ring-neutral-300 px-6 py-10 sm:px-10">
-                <h2 class="text-base font-semibold">EXPERIENCE PROFESSIONNELLE</h2>
+            <p class="mt-6 max-w-3xl text-sm leading-relaxed text-neutral-800">
+              Une formation intensive et complète en développement web qui permet de renforcer mes compétences techniques tout en développant les soft skills essentiels au monde professionnel. Elle combine pratique, projets concrets et travail collaboratif
+            </p>
+            <ul class="mt-5 list-disc space-y-1 pl-5 text-sm text-neutral-800">
+              <li>Développement frontend : HTML, CSS, Tailwind</li>
+              <li>Développement backend</li>
+              <li>Réalisation de projets pratiques et concrets</li>
+              <li>Utilisation d’outils modernes de développement</li>
+              <li>Travail en équipe et collaboration sur des projets</li>
+              <li>Développement des soft skills (communication, organisation, esprit critique)</li>
+            </ul>
 
-                <div class="mt-6">
-                    <div class="flex items-center justify-between gap-4">
-                    <div>
-                            <div class="text-sm font-medium">Stage Académique</div>
-                            <div class="mt-3 text-sm font-semibold">SENAT, RDC</div>
-                    </div>
-                    <div class="inline-flex items-center gap-3 rounded-full border border-neutral-300 px-5 py-2 text-xs font-semibold text-neutral-900">
-                            <span class="h-2.5 w-6 rounded-full bg-black"></span>
-                            <span>MAI 2025 (1mois)</span>
-                    </div>
-                    </div>
+            <div class="my-8 border-t border-dashed border-neutral-300"></div>
 
-                    <p class="mt-6 max-w-3xl text-sm leading-relaxed text-neutral-800">
-                    Dans le cadre de mon stage académique au Sénat de la RDC, j’ai découvert l’environnement professionnel en échangeant avec différents agents. Ces interactions m’ont permis de mieux comprendre le fonctionnement de l’institution, tout en recueillant des informations utiles pour mon projet de mémoire de fin d’études.
-                    </p>
-                    <ul class="mt-5 list-disc space-y-1 pl-5 text-sm text-neutral-800">
-                        <li>Réalisation d’un projet : système d’enregistrement des agents (PHP &amp; MySQL)</li>
-                        <li>Acquisition de notions en réseau informatique</li>
-                        <li>Mise en pratique des connaissances académiques et travail collaboratif</li>
-                    </ul>
+            <div class="flex items-start justify-between gap-4">
+              <div class="text-sm font-semibold">Centre de formation OGI</div>
+              <div class="inline-flex items-center gap-3 rounded-full border border-neutral-300 px-5 py-2 text-xs font-semibold text-neutral-900">
+                <span class="h-2.5 w-6 rounded-full bg-black"></span>
+                <span>2022 (3 mois)</span>
+              </div>
+            </div>
 
-                    <div class="my-8 border-t border-dashed border-neutral-300"></div>
+            <p class="mt-6 max-w-3xl text-sm leading-relaxed text-neutral-800">
+              Cette formation a constitué mon premier pas dans le développement informatique, me permettant d’acquérir les bases essentielles et de découvrir le monde de la programmation.
+            </p>
+            <ul class="mt-5 list-disc space-y-1 pl-5 text-sm text-neutral-800">
+              <li>Compréhension des bases de la programmation</li>
+              <li>Initiation au développement web avec PHP</li>
+              <li>Première expérience concrète dans le développement</li>
+            </ul>
+          </div>
+        </section>
 
-                    <div class="flex items-center justify-between gap-4">
-                        <div>
-                                <div class="mt-2 text-sm font-semibold">REGIDESO, RDC</div>
-                        </div>
-                        <div class="inline-flex items-center gap-3 rounded-full border border-neutral-300 px-5 py-2 text-xs font-semibold text-neutral-900">
-                                <span class="h-2.5 w-6 rounded-full bg-black"></span>
-                                <span>MAI 2024 (1mois)</span>
-                        </div>
-                    </div>
+        <!-- Education -->
+        <section class="bg-white ring-1 ring-neutral-300 px-6 py-12 sm:px-12 sm:py-14 md:py-16">
+          <h2 class="text-lg font-bold tracking-tight text-neutral-950 sm:text-xl">EDUCATION</h2>
 
-                    <p class="mt-6 max-w-3xl text-sm leading-relaxed text-neutral-800">
-                        Dans le cadre de mon stage académique à la REGIDESO, j’ai découvert le fonctionnement d’une entreprise publique en participant aux activités quotidiennes et en collaborant avec une équipe de stagiaires.
-                    </p>
-                    <ul class="mt-5 list-disc space-y-1 pl-5 text-sm text-neutral-800">
-                        <li>Travail collaboratif au sein d’une équipe de stagiaires</li>
-                        <li>Réalisation d’un mini projet en groupe : gestion des équipements informatiques (PHP &amp; MySQL)</li>
-                        <li>Répartition des tâches et exécution de travaux pratiques.</li>
-                    </ul>
-                </div>
-            </section>
+          <div class="mt-8 grid grid-cols-[120px_24px_minmax(0,1fr)] gap-x-6 gap-y-10 sm:grid-cols-[140px_28px_minmax(0,1fr)]">
+            <!-- Ligne verticale continue (centrée sur la colonne des cercles) -->
+            <div class="relative col-start-2 row-start-1 row-span-3">
+              <div class="pointer-events-none absolute left-1/2 top-2 bottom-2 w-px -translate-x-1/2 bg-neutral-300"></div>
+            </div>
 
-            <!-- Formation -->
-            <section class="bg-white ring-1 ring-neutral-300 px-6 py-10 sm:px-10">
-                <h2 class="text-base font-semibold">FORMATION</h2>
+            <!-- ligne 1 -->
+            <div class="col-start-1 row-start-1 text-sm text-neutral-600">2021 - 2025</div>
+            <div class="relative col-start-2 row-start-1 flex justify-center">
+              <div class="relative z-10 mt-2 grid h-4 w-4 place-items-center rounded-full border border-neutral-400 bg-white">
+                <span class="h-1.5 w-1.5 rounded-full bg-black"></span>
+              </div>
+            </div>
+            <div class="col-start-3 row-start-1">
+              <div class="text-sm font-semibold text-center sm:text-left">UPC</div>
+              <div class="mt-2 text-sm text-neutral-800">
+                Licence en Sciences Informatiques<br />
+                Option Ingénierie Logicielle (Bac+4)
+              </div>
+            </div>
 
-                    <div class="mt-6">
-                        <div class="flex items-start justify-between gap-4">
-                            <div class="text-sm font-semibold">KADEA ACADEMY</div>
-                            <div class="inline-flex items-center gap-3 rounded-full border border-neutral-300 px-5 py-2 text-xs font-semibold text-neutral-900">
-                                <span class="h-2.5 w-6 rounded-full bg-black"></span>
-                                <span>2026 - Présent</span>
-                            </div>
-                        </div>
+            <!-- ligne 2 -->
+            <div class="col-start-1 row-start-2 text-sm text-neutral-600">2015 - 2021</div>
+            <div class="relative col-start-2 row-start-2 flex justify-center">
+              <div class="relative z-10 mt-2 grid h-4 w-4 place-items-center rounded-full border border-neutral-400 bg-white">
+                <span class="h-1.5 w-1.5 rounded-full bg-black"></span>
+              </div>
+            </div>
+            <div class="col-start-3 row-start-2">
+              <div class="text-sm font-semibold text-center sm:text-left">Collège Notre Dame Du Congo</div>
+              <div class="mt-2 text-sm text-neutral-800">Diplôme D’état en Biologie - Chimie</div>
+            </div>
 
-                        <p class="mt-6 max-w-3xl text-sm leading-relaxed text-neutral-800">
-                        Une formation intensive et complète en développement web qui permet de renforcer mes compétences techniques tout en développant les soft skills essentiels au monde professionnel. Elle combine pratique, projets concrets et travail collaboratif
-                        </p>
-                        <ul class="mt-5 list-disc space-y-1 pl-5 text-sm text-neutral-800">
-                            <li>Développement frontend : HTML, CSS, Tailwind</li>
-                            <li>Développement backend</li>
-                            <li>Réalisation de projets pratiques et concrets</li>
-                            <li>Utilisation d’outils modernes de développement</li>
-                            <li>Travail en équipe et collaboration sur des projets</li>
-                            <li>Développement des soft skills (communication, organisation, esprit critique)</li>
-                        </ul>
+            <!-- ligne 3 -->
+            <div class="col-start-1 row-start-3 text-sm text-neutral-600">2007 - 2015</div>
+            <div class="relative col-start-2 row-start-3 flex justify-center">
+              <div class="relative z-10 mt-2 grid h-4 w-4 place-items-center rounded-full border border-neutral-400 bg-white">
+                <span class="h-1.5 w-1.5 rounded-full bg-black"></span>
+              </div>
+            </div>
+            <div class="col-start-3 row-start-3">
+              <div class="text-sm font-semibold text-center sm:text-left">Complexe Scolaire LOLIKI</div>
+              <div class="mt-2 text-sm text-neutral-800">Ecole Maternelle et Primaire</div>
+            </div>
+          </div>
+        </section>
+      </main>
 
-                        <div class="my-8 border-t border-dashed border-neutral-300"></div>
-
-                        <div class="flex items-start justify-between gap-4">
-                        <div class="text-sm font-semibold">Centre de formation OGI</div>
-                        <div class="inline-flex items-center gap-3 rounded-full border border-neutral-300 px-5 py-2 text-xs font-semibold text-neutral-900">
-                            <span class="h-2.5 w-6 rounded-full bg-black"></span>
-                            <span>2022 (3 mois)</span>
-                        </div>
-                        </div>
-
-                        <p class="mt-6 max-w-3xl text-sm leading-relaxed text-neutral-800">
-                        Cette formation a constitué mon premier pas dans le développement informatique, me permettant d’acquérir les bases essentielles et de découvrir le monde de la programmation.
-                        </p>
-                        <ul class="mt-5 list-disc space-y-1 pl-5 text-sm text-neutral-800">
-                            <li>Compréhension des bases de la programmation</li>
-                            <li>Initiation au développement web avec PHP</li>
-                            <li>Première expérience concrète dans le développement</li>
-                        </ul>
-                    </div>
-            </section>
-
-            <!-- Education -->
-            <section class="bg-white ring-1 ring-neutral-300 px-6 py-10 sm:px-10">
-                <h2 class="text-base font-semibold">EDUCATION</h2>
-
-                <div class="mt-8 grid grid-cols-[120px_24px_minmax(0,1fr)] gap-x-6 gap-y-10 sm:grid-cols-[140px_28px_minmax(0,1fr)]">
-                
-                    <div class="relative col-start-2 row-start-1 row-span-3">
-                        <div class="pointer-events-none absolute left-1/2 top-2 bottom-2 w-px -translate-x-1/2 bg-neutral-300"></div>
-                    </div>
-
-                
-                    <div class="col-start-1 row-start-1 text-sm text-neutral-600">2021 - 2025</div>
-                    <div class="relative col-start-2 row-start-1 flex justify-center">
-                        <div class="relative z-10 mt-2 grid h-4 w-4 place-items-center rounded-full border border-neutral-400 bg-white">
-                            <span class="h-1.5 w-1.5 rounded-full bg-black"></span>
-                        </div>
-                    </div>
-                    <div class="col-start-3 row-start-1">
-                        <div class="text-sm font-semibold text-center sm:text-left">UPC</div>
-                        <div class="mt-2 text-sm text-neutral-800">
-                            Licence en Sciences Informatiques<br />
-                            Option Ingénierie Logicielle (Bac+4)
-                        </div>
-                    </div>
-
-                
-                    <div class="col-start-1 row-start-2 text-sm text-neutral-600">2015 - 2021</div>
-                        <div class="relative col-start-2 row-start-2 flex justify-center">
-                            <div class="relative z-10 mt-2 grid h-4 w-4 place-items-center rounded-full border border-neutral-400 bg-white">
-                                <span class="h-1.5 w-1.5 rounded-full bg-black"></span>
-                            </div>
-                        </div>
-                        <div class="col-start-3 row-start-2">
-                            <div class="text-sm font-semibold text-center sm:text-left">Collège Notre Dame Du Congo</div>
-                            <div class="mt-2 text-sm text-neutral-800">Diplôme D’état en Biologie - Chimie</div>
-                        </div>
-
-                        <div class="col-start-1 row-start-3 text-sm text-neutral-600">2007 - 2015</div>
-                        <div class="relative col-start-2 row-start-3 flex justify-center">
-                            <div class="relative z-10 mt-2 grid h-4 w-4 place-items-center rounded-full border border-neutral-400 bg-white">
-                                <span class="h-1.5 w-1.5 rounded-full bg-black"></span>
-                            </div>
-                        </div>
-                        <div class="col-start-3 row-start-3">
-                            <div class="text-sm font-semibold text-center sm:text-left">Complexe Scolaire LOLIKI</div>
-                            <div class="mt-2 text-sm text-neutral-800">Ecole Maternelle et Primaire</div>
-                        </div>
-                </div>
-            </section>
-        </main>
-            <!-- Footer  -->
-    <footer class="mx-auto w-full max-w-[920px] bg-white ring-1 ring-neutral-300 px-6 py-10 text-center sm:px-10">
-      <div class="text-sm text-neutral-900">2026 © Designed by <span class="font-extrabold">EGMON</span></div>
-    </footer>
+      <!-- Footer -->
+      <footer
+        id="contact"
+        class="mx-auto w-full max-w-[960px] bg-white ring-1 ring-neutral-300 px-6 py-12 text-center sm:px-12 sm:py-14 md:py-16"
+      >
+        <div class="text-sm text-neutral-900">2026 © Designed by <span class="font-extrabold">EGMON</span></div>
+      </footer>
     </body>
 </html>

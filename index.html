@@ -1,408 +1,1283 @@
 <!doctype html>
 <html lang="fr">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Portfolio — Prospere Engeba</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Egmon — Prospere Engeba</title>
+    <meta
+      name="description"
+      content="Portfolio de Prospere Engeba, développeur web junior à Kinshasa — applications web modernes et performantes."
+    />
 
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet"
-      />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
-      <script src="https://cdn.tailwindcss.com"></script>
-      <script>
-        tailwind.config = {
-          theme: {
-            extend: {
-              fontFamily: {
-                sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-              },
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              void: '#0a0a0a',
+              glow: '#163f6b',
+              glowDeep: '#122b46',
+              cardHover: '#0d131d',
+            },
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'sans-serif'],
+              display: ['"Playfair Display"', 'Georgia', 'serif'],
             },
           },
-        };
-      </script>
-    </head>
+        },
+      };
+    </script>
 
-    <body class="min-h-dvh bg-neutral-100 px-3 py-8 font-sans text-neutral-900 antialiased sm:px-6 sm:py-10">
-      <header class="mx-auto w-full max-w-[960px] border-b border-neutral-300 bg-white ring-1 ring-neutral-300">
-        <div class="relative">
-          <img
-            src="./images/desktop/banner1.jpg"
-            alt="image_banniere"
-            class="block h-44 w-full object-cover object-center grayscale sm:h-56 md:h-64 lg:h-72"
-            decoding="async" fetchpriority="high" loading="eager"/>
+    <style>
+      html {
+        scroll-behavior: smooth;
+        /* Offset = hauteur réelle de la nav fixe (évite de s’arrêter trop tôt) */
+        scroll-padding-top: 5.75rem;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+        }
+      }
+
+      /* Micro-révélation au scroll (titres + cards) */
+      .reveal {
+        opacity: 0;
+        transform: translateY(1.1rem);
+        transition:
+          opacity 550ms ease,
+          transform 550ms ease;
+        transition-delay: var(--reveal-delay, 0ms);
+        will-change: opacity, transform;
+      }
+
+      .reveal.is-in {
+        opacity: 1;
+        transform: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+          will-change: auto;
+        }
+      }
+
+      body {
+        background-color: #0a0a0a;
+        background-image:
+          radial-gradient(ellipse 55% 45% at 8% 0%, rgba(22, 63, 107, 0.55), transparent 60%),
+          radial-gradient(ellipse 50% 40% at 92% 0%, rgba(18, 43, 70, 0.5), transparent 58%),
+          radial-gradient(ellipse 40% 30% at 50% 35%, rgba(22, 63, 107, 0.12), transparent 70%);
+        background-attachment: fixed;
+      }
+
+      /* Header shell — always fixed */
+      .site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        display: flex;
+        justify-content: center;
+        padding: 1.25rem 1rem 0;
+        pointer-events: none;
+        transition: padding 280ms ease;
+      }
+
+      .site-header.is-scrolled {
+        padding: 0.85rem 1rem 0;
+      }
+
+      /* Nav — état normal (début) */
+      .site-nav {
+        pointer-events: auto;
+        width: 100%;
+        max-width: 72rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.65rem 0.5rem;
+        border-radius: 9999px;
+        border: 1px solid transparent;
+        background: transparent;
+        backdrop-filter: blur(0);
+        box-shadow: none;
+        transition:
+          max-width 320ms ease,
+          padding 280ms ease,
+          background-color 280ms ease,
+          border-color 280ms ease,
+          box-shadow 280ms ease,
+          backdrop-filter 280ms ease;
+      }
+
+      /* Nav — au scroll : pill flottante + fixe */
+      .site-header.is-scrolled .site-nav {
+        max-width: 52rem;
+        padding: 0.55rem 0.65rem 0.55rem 1.1rem;
+        border-color: rgba(255, 255, 255, 0.1);
+        background: rgba(10, 10, 10, 0.72);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow:
+          0 0 0 1px rgba(22, 63, 107, 0.15),
+          0 16px 40px -20px rgba(0, 0, 0, 0.7);
+      }
+
+      .nav-links a {
+        color: rgba(255, 255, 255, 0.72);
+        transition: color 160ms ease;
+      }
+
+      .nav-links a:hover,
+      .nav-links a:focus-visible {
+        color: #fff;
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.5rem;
+        padding: 0 1.25rem;
+        border-radius: 9999px;
+        background: #f2f2f2;
+        color: #0a0a0a;
+        font-size: 0.875rem;
+        font-weight: 600;
+        transition: background-color 160ms ease, transform 160ms ease;
+      }
+
+      .btn-primary:hover {
+        background: #fff;
+      }
+
+      .btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.5rem;
+        padding: 0 1.25rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: transparent;
+        color: #fff;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: border-color 160ms ease, background-color 160ms ease;
+      }
+
+      .btn-ghost:hover {
+        border-color: rgba(255, 255, 255, 0.35);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .hero-title {
+        font-size: clamp(2.25rem, 6vw, 3.75rem);
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        text-shadow: 0 0 40px rgba(22, 63, 107, 0.35);
+      }
+
+      .tool-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.85rem;
+        padding: 0.55rem 0.95rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04);
+        backdrop-filter: blur(8px);
+      }
+
+      .burger-btn {
+        display: grid;
+        place-items: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 9999px;
+        color: #fff;
+        transition: background-color 160ms ease;
+      }
+
+      .burger-btn:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .burger-btn .icon-close {
+        display: none;
+      }
+
+      .burger-btn.is-open .icon-burger {
+        display: none;
+      }
+
+      .burger-btn.is-open .icon-close {
+        display: block;
+      }
+
+      @media (min-width: 768px) {
+        .burger-btn {
+          display: none;
+        }
+      }
+
+      /* Panneau mobile — plein écran */
+      .mobile-panel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100dvh;
+        min-height: 100%;
+        z-index: 45;
+        display: flex;
+        flex-direction: column;
+        padding: 5.75rem 1.5rem 2rem;
+        background: #0a0a0a;
+        background-image:
+          radial-gradient(ellipse 55% 40% at 10% 0%, rgba(22, 63, 107, 0.45), transparent 55%),
+          radial-gradient(ellipse 50% 35% at 90% 0%, rgba(18, 43, 70, 0.4), transparent 55%);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-12px);
+        transition:
+          opacity 220ms ease,
+          visibility 220ms ease,
+          transform 220ms ease;
+      }
+
+      .mobile-panel.is-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      @media (min-width: 768px) {
+        .mobile-panel {
+          display: none !important;
+        }
+      }
+
+      .mobile-panel a {
+        transition: color 160ms ease, background-color 160ms ease;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      /* Cards compétences */
+      .skill-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-height: 260px;
+        padding: 1.75rem 1.5rem 1.75rem;
+        border-radius: 1.25rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: #0a0a0a;
+        overflow: hidden;
+        isolation: isolate;
+        transition: border-color 280ms ease;
+      }
+
+      /*
+        Hover : #0b0f16 UNIQUEMENT en haut (~28%),
+        le reste de la card reste noir — comme la ref.
+      */
+      .skill-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 28%;
+        background: linear-gradient(
+          180deg,
+          #0b0f16 0%,
+          #0b0f16 35%,
+          rgba(11, 15, 22, 0.55) 70%,
+          transparent 100%
+        );
+        opacity: 0;
+        transition: opacity 280ms ease;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .skill-card:hover,
+      .skill-card:focus-within {
+        border-color: rgba(255, 255, 255, 0.12);
+      }
+
+      .skill-card:hover::before,
+      .skill-card:focus-within::before {
+        opacity: 1;
+      }
+
+      .skill-card .skill-icon {
+        color: rgba(255, 255, 255, 0.4);
+        transition: color 280ms ease;
+      }
+
+      .skill-card:hover .skill-icon,
+      .skill-card:focus-within .skill-icon {
+        color: #3d6fa3;
+      }
+
+      .skill-card .skill-extra {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        margin-top: 0;
+        transition:
+          max-height 320ms ease,
+          opacity 240ms ease,
+          margin-top 280ms ease;
+      }
+
+      .skill-card:hover .skill-extra,
+      .skill-card:focus-within .skill-extra {
+        max-height: 10rem;
+        opacity: 1;
+        margin-top: 1.25rem;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .skill-card .skill-extra {
+          max-height: none;
+          opacity: 1;
+          margin-top: 1.25rem;
+        }
+      }
+
+      /* Cards projets */
+      .project-card {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        border-radius: 1.25rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: #0a0a0a;
+        transition: border-color 220ms ease, transform 220ms ease;
+      }
+
+      .project-card:hover {
+        border-color: rgba(255, 255, 255, 0.16);
+        transform: translateY(-2px);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .project-card:hover {
+          transform: none;
+        }
+      }
+
+      .project-card__media {
+        position: relative;
+        aspect-ratio: 16 / 10;
+        overflow: hidden;
+        background: #0b0f16;
+      }
+
+      .project-card__placeholder {
+        display: grid;
+        place-items: center;
+        width: 100%;
+        height: 100%;
+        background:
+          radial-gradient(ellipse 70% 60% at 30% 20%, rgba(22, 63, 107, 0.45), transparent 65%),
+          radial-gradient(ellipse 50% 50% at 80% 80%, rgba(18, 43, 70, 0.4), transparent 60%),
+          #0b0f16;
+        color: rgba(255, 255, 255, 0.35);
+      }
+
+      .project-card__placeholder span {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .project-card__badge {
+        position: absolute;
+        top: 0.85rem;
+        left: 0.85rem;
+        z-index: 1;
+        border-radius: 9999px;
+        background: rgba(11, 15, 22, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 0.3rem 0.7rem;
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #9ec0e0;
+      }
+
+      .project-card.is-hidden {
+        display: none;
+      }
+
+      .project-filter {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 9999px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: transparent;
+        padding: 0.4rem 0.95rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.55);
+        transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease;
+      }
+
+      .project-filter:hover {
+        color: rgba(255, 255, 255, 0.9);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .project-filter.is-active {
+        color: #fff;
+        border-color: rgba(158, 192, 224, 0.45);
+        background: rgba(22, 63, 107, 0.35);
+      }
+
+      .project-empty {
+        display: none;
+        grid-column: 1 / -1;
+        padding: 2.5rem 1rem;
+        text-align: center;
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.45);
+      }
+
+      .project-empty.is-visible {
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body class="min-h-dvh font-sans text-white antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-white focus:px-4 focus:py-2 focus:text-void"
+    >
+      Aller au contenu
+    </a>
+
+    <!-- HEADER : normal → pill au scroll (fixe) -->
+    <header id="site-header" class="site-header">
+      <nav class="site-nav" aria-label="Navigation principale">
+        <!-- Logo -->
+        <a href="#home" class="flex shrink-0 items-center gap-2.5 pl-2 sm:pl-3">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="m7 8 4 4-4 4"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path d="M13 16h4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+          </svg>
+          <span class="text-[0.95rem] font-semibold tracking-tight">Egmon</span>
+        </a>
+
+        <!-- Links (desktop) -->
+        <div class="nav-links hidden items-center gap-7 text-sm font-medium md:flex">
+          <a href="#home">Home</a>
+          <a href="#skills">Skills</a>
+          <a href="#projet">Projet</a>
+          <a href="#parcours">Parcours</a>
         </div>
 
-        <div class="relative px-5 pb-6 pt-0 sm:px-10 sm:pb-8 md:pb-10">
-          <div class="-mt-12 flex flex-col items-center gap-5 sm:-mt-16 sm:flex-row sm:items-start sm:justify-between sm:gap-8 md:-mt-20 md:gap-10">
-            <div class="flex w-full max-w-md flex-col items-center sm:max-w-none sm:items-start">
-              <div class="h-24 w-24 shrink-0 overflow-hidden rounded-full ring-4 ring-white shadow-md sm:h-28 sm:w-28 sm:ring-[5px]">
-                <img src="./images/auteur/egmon.jpg" alt="Profil" class="h-full w-full object-cover" loading="lazy" />
-              </div>
+        <!-- Actions (desktop) -->
+        <div class="hidden shrink-0 items-center gap-2 sm:gap-3 md:flex">
+          <a
+            href="https://www.linkedin.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="grid h-9 w-9 place-items-center rounded-full text-white/70 transition hover:bg-white/5 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
+            aria-label="LinkedIn"
+            title="LinkedIn — ajoute ton lien"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M6.94 8.5H4.25V19h2.69V8.5ZM5.6 7.3a1.56 1.56 0 1 0 0-3.12 1.56 1.56 0 0 0 0 3.12ZM19.75 19h-2.69v-5.2c0-1.24-.02-2.83-1.72-2.83-1.73 0-2 1.35-2 2.74V19H10.66V8.5h2.58v1.43h.04c.36-.68 1.24-1.4 2.55-1.4 2.73 0 3.23 1.8 3.23 4.13V19Z" />
+            </svg>
+          </a>
+          <a
+            href="https://wa.me/243895467658"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="grid h-9 w-9 place-items-center rounded-full text-white/70 transition hover:bg-white/5 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
+            aria-label="WhatsApp"
+          >
+            <img src="./images/icon/whatsapp.png" alt="" class="h-4 w-4 object-contain brightness-0 invert" />
+          </a>
+          <a
+            href="https://www.instagram.com/prospere_egmon/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="grid h-9 w-9 place-items-center rounded-full text-white/70 transition hover:bg-white/5 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
+            aria-label="Instagram — prospere_egmon"
+          >
+            <img src="./images/icon/instagram.png" alt="" class="h-4 w-4 object-contain brightness-0 invert" />
+          </a>
 
-              <div class="mt-4 w-full text-center sm:mt-5 sm:text-left">
-                <div class="text-2xl font-semibold tracking-tight text-neutral-950">PROSPERE ENGEBA</div>
-                <div class="mt-2 text-sm font-semibold text-indigo-700 sm:text-base">Développeur web junior</div>
-                <div class="mt-2 flex items-center justify-center gap-2 text-xs text-neutral-600 sm:justify-start sm:text-sm">
-                  <img src="./images/icon/localisation.png" alt="" class="h-3.5 w-3.5 shrink-0 opacity-80 sm:h-4 sm:w-4" />
-                  <span>Kinshasa , RDC</span>
-                </div>
-              </div>
-            </div>
+          <a href="#contact" class="btn-primary">Contactez-moi</a>
+        </div>
 
-            <!-- Icônes + bouton -->
-            <div
-              class="mt-6 flex w-full max-w-md flex-col items-center gap-3 pb-0 sm:mt-0 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-end sm:gap-4 sm:pb-0 sm:pt-[8.25rem]"
+        <!-- Burger (mobile) -->
+        <button
+          type="button"
+          id="burger-btn"
+          class="burger-btn"
+          aria-label="Ouvrir le menu"
+          aria-expanded="false"
+          aria-controls="mobile-panel"
+        >
+          <svg class="icon-burger" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+          </svg>
+          <svg class="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+          </svg>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Menu mobile plein écran -->
+    <div id="mobile-panel" class="mobile-panel" aria-hidden="true">
+      <nav class="flex h-full min-h-0 w-full flex-1 flex-col" aria-label="Navigation mobile">
+        <div class="flex flex-col gap-1 text-xl font-medium">
+          <a href="#home" class="mobile-link rounded-xl px-4 py-4 text-white/90 hover:bg-white/5 hover:text-white">Home</a>
+          <a href="#skills" class="mobile-link rounded-xl px-4 py-4 text-white/90 hover:bg-white/5 hover:text-white">Skills</a>
+          <a href="#projet" class="mobile-link rounded-xl px-4 py-4 text-white/90 hover:bg-white/5 hover:text-white">Projet</a>
+          <a href="#parcours" class="mobile-link rounded-xl px-4 py-4 text-white/90 hover:bg-white/5 hover:text-white">Parcours</a>
+        </div>
+
+        <div class="mt-auto space-y-5 border-t border-white/10 pt-6">
+          <a href="#contact" class="btn-primary mobile-link w-full min-h-12">Contactez-moi</a>
+
+          <div class="flex items-center justify-center gap-3">
+            <a
+              href="https://www.linkedin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="grid h-11 w-11 place-items-center rounded-full border border-white/12 bg-white/[0.04] text-white/80"
+              aria-label="LinkedIn"
+              title="LinkedIn — ajoute ton lien"
             >
-              <div class="flex items-center justify-center gap-2 sm:justify-end">
-                <a
-                  href="https://wa.me/243895467658"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="grid h-9 w-9 place-items-center rounded-full border border-neutral-200 bg-white transition hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40"
-                  aria-label="WhatsApp"
-                >
-                  <img src="./images/icon/whatsapp.png" alt="" class="h-3.5 w-3.5 object-contain" />
-                </a>
-                <a
-                  href="https://www.facebook.com/prospere.egmon"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="grid h-9 w-9 place-items-center rounded-full border border-neutral-200 bg-white transition hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40"
-                  aria-label="Facebook — Prospere Egmon"
-                >
-                  <img src="./images/icon/facebook.png" alt="" class="h-3.5 w-3.5 object-contain" />
-                </a>
-                <a
-                  href="https://www.instagram.com/prospere_egmon/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="grid h-9 w-9 place-items-center rounded-full border border-neutral-200 bg-white transition hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40"
-                  aria-label="Instagram — prospere_egmon"
-                >
-                  <img src="./images/icon/instagram.png" alt="" class="h-3.5 w-3.5 object-contain" />
-                </a>
-              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M6.94 8.5H4.25V19h2.69V8.5ZM5.6 7.3a1.56 1.56 0 1 0 0-3.12 1.56 1.56 0 0 0 0 3.12ZM19.75 19h-2.69v-5.2c0-1.24-.02-2.83-1.72-2.83-1.73 0-2 1.35-2 2.74V19H10.66V8.5h2.58v1.43h.04c.36-.68 1.24-1.4 2.55-1.4 2.73 0 3.23 1.8 3.23 4.13V19Z" />
+              </svg>
+            </a>
+            <a
+              href="https://wa.me/243895467658"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="grid h-11 w-11 place-items-center rounded-full border border-white/12 bg-white/[0.04]"
+              aria-label="WhatsApp"
+            >
+              <img src="./images/icon/whatsapp.png" alt="" class="h-5 w-5 object-contain brightness-0 invert" />
+            </a>
+            <a
+              href="https://www.instagram.com/prospere_egmon/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="grid h-11 w-11 place-items-center rounded-full border border-white/12 bg-white/[0.04]"
+              aria-label="Instagram — prospere_egmon"
+            >
+              <img src="./images/icon/instagram.png" alt="" class="h-5 w-5 object-contain brightness-0 invert" />
+            </a>
+            <a
+              href="https://www.facebook.com/prospere.egmon"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="grid h-11 w-11 place-items-center rounded-full border border-white/12 bg-white/[0.04]"
+              aria-label="Facebook — Prospere Egmon"
+            >
+              <img src="./images/icon/facebook.png" alt="" class="h-5 w-5 object-contain brightness-0 invert" />
+            </a>
+          </div>
 
-              <a
-                href="#contact"
-                class="group inline-flex rounded-full bg-gradient-to-r from-[#9A3A98] to-[#F3CA4D] p-[2px] transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40"
-              >
-                <span
-                  class="inline-flex rounded-full bg-black px-5 py-2.5 text-sm font-semibold text-white transition group-hover:bg-neutral-900 sm:px-6 sm:py-3"
-                >
-                  Contactez moi
+          <p class="text-center text-xs text-white/35">Kinshasa, RDC · Prospere Engeba</p>
+        </div>
+      </nav>
+    </div>
+
+    <main id="main">
+      <!-- HERO -->
+      <section
+        id="home"
+        class="relative flex min-h-dvh flex-col items-center justify-center px-5 pb-16 pt-28 text-center sm:px-8 md:justify-start md:pt-36 lg:pt-40"
+      >
+        <h1 class="hero-title mx-auto max-w-3xl font-extrabold text-white md:mt-2">
+          Prospere Engeba<br class="hidden sm:block" />
+          Développeur web
+        </h1>
+
+        <p class="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
+          Je conçois des applications web modernes, performantes et adaptées aux besoins réels — formation en ingénierie logicielle.
+        </p>
+
+        <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+          <a href="#contact" class="btn-primary min-h-11 px-6">Contactez-moi</a>
+          <a href="#projet" class="btn-ghost min-h-11 px-6">Voir projets</a>
+        </div>
+
+        <div class="mt-8 flex items-center justify-center gap-3">
+          <a
+            href="https://www.linkedin.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="grid h-11 w-11 place-items-center rounded-full border border-transparent text-white/80 transition hover:border-white/30 hover:bg-white/[0.06] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
+            aria-label="LinkedIn"
+            title="LinkedIn — ajoute ton lien"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M6.94 8.5H4.25V19h2.69V8.5ZM5.6 7.3a1.56 1.56 0 1 0 0-3.12 1.56 1.56 0 0 0 0 3.12ZM19.75 19h-2.69v-5.2c0-1.24-.02-2.83-1.72-2.83-1.73 0-2 1.35-2 2.74V19H10.66V8.5h2.58v1.43h.04c.36-.68 1.24-1.4 2.55-1.4 2.73 0 3.23 1.8 3.23 4.13V19Z" />
+            </svg>
+          </a>
+          <a
+            href="https://wa.me/243895467658"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="grid h-11 w-11 place-items-center rounded-full border border-transparent transition hover:border-white/30 hover:bg-white/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
+            aria-label="WhatsApp"
+          >
+            <img src="./images/icon/whatsapp.png" alt="" class="h-5 w-5 object-contain brightness-0 invert" />
+          </a>
+          <a
+            href="https://www.instagram.com/prospere_egmon/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="grid h-11 w-11 place-items-center rounded-full border border-transparent transition hover:border-white/30 hover:bg-white/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
+            aria-label="Instagram — prospere_egmon"
+          >
+            <img src="./images/icon/instagram.png" alt="" class="h-5 w-5 object-contain brightness-0 invert" />
+          </a>
+          <a
+            href="https://www.facebook.com/prospere.egmon"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="grid h-11 w-11 place-items-center rounded-full border border-transparent transition hover:border-white/30 hover:bg-white/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
+            aria-label="Facebook — Prospere Egmon"
+          >
+            <img src="./images/icon/facebook.png" alt="" class="h-5 w-5 object-contain brightness-0 invert" />
+          </a>
+        </div>
+
+        <p class="absolute bottom-6 left-0 right-0 text-center text-xs text-white/35">
+          Designed by <span class="underline decoration-white/30 underline-offset-2">Prospere Engeba</span>
+        </p>
+      </section>
+
+      <!-- Compétences et outils -->
+      <section id="skills" class="border-t border-white/5 px-5 py-20 sm:px-8 sm:py-24">
+        <div class="mx-auto max-w-6xl">
+          <h2 class="reveal text-center text-xl font-semibold tracking-tight text-white sm:text-2xl">
+            Compétences et outils
+          </h2>
+          <p class="mx-auto mt-3 max-w-lg text-center text-sm text-white/50">
+            Ce que j’utilise au quotidien pour construire des applications web.
+          </p>
+
+          <div class="mt-12 grid gap-4 md:grid-cols-3 md:gap-5">
+            <!-- 01 Frontend & Design -->
+            <article class="skill-card reveal" style="--reveal-delay: 60ms" tabindex="0">
+              <div class="relative z-10 flex items-start justify-between">
+                <span class="text-4xl font-semibold tracking-tight text-white/25 sm:text-5xl">01</span>
+                <span class="skill-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <path d="M13 3 4 14h7l-1 7 9-11h-7l1-7Z" stroke-linejoin="round" />
+                  </svg>
                 </span>
-              </a>
-            </div>
+              </div>
+              <div class="relative z-10 mt-auto pt-16">
+                <h3 class="text-xl font-semibold tracking-tight text-white sm:text-2xl">
+                  Frontend &amp; Design
+                </h3>
+                <div class="skill-extra">
+                  <div class="mb-3 h-px w-full bg-white/15"></div>
+                  <p class="text-sm leading-relaxed text-white/65">
+                    HTML, CSS, Tailwind
+                    <br />
+                    Figma, Canva Design
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <!-- 02 Backend & Data -->
+            <article class="skill-card reveal" style="--reveal-delay: 140ms" tabindex="0">
+              <div class="relative z-10 flex items-start justify-between">
+                <span class="text-4xl font-semibold tracking-tight text-white/25 sm:text-5xl">02</span>
+                <span class="skill-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <path d="M12 3 4 7.5v9L12 21l8-4.5v-9L12 3Z" stroke-linejoin="round" />
+                    <path d="M12 12 4 7.5M12 12l8-4.5M12 12v9" stroke-linejoin="round" />
+                  </svg>
+                </span>
+              </div>
+              <div class="relative z-10 mt-auto pt-16">
+                <h3 class="text-xl font-semibold tracking-tight text-white sm:text-2xl">
+                  Backend &amp; Data
+                </h3>
+                <div class="skill-extra">
+                  <div class="mb-3 h-px w-full bg-white/15"></div>
+                  <p class="text-sm leading-relaxed text-white/65">
+                    Django, Adonis JS/TypeScript
+                    <br />
+                    MySQL, PostgreSQL
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <!-- 03 Outils & Système -->
+            <article class="skill-card reveal" style="--reveal-delay: 220ms" tabindex="0">
+              <div class="relative z-10 flex items-start justify-between">
+                <span class="text-4xl font-semibold tracking-tight text-white/25 sm:text-5xl">03</span>
+                <span class="skill-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </span>
+              </div>
+              <div class="relative z-10 mt-auto pt-16">
+                <h3 class="text-xl font-semibold tracking-tight text-white sm:text-2xl">
+                  Outils &amp; Système
+                </h3>
+                <div class="skill-extra">
+                  <div class="mb-3 h-px w-full bg-white/15"></div>
+                  <p class="text-sm leading-relaxed text-white/65">
+                    Docker, Git / GitHub, Vagrant
+                    <br />
+                    Arduino, maintenance &amp; support
+                    <br />
+                    IA générative
+                  </p>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
-      </header>
+      </section>
 
-      <main class="mx-auto mt-8 w-full max-w-[960px] space-y-8 sm:mt-10 sm:space-y-10">
-        <!-- A propos + Compétences -->
-        <section class="bg-white ring-1 ring-neutral-300 px-6 py-12 sm:px-12 sm:py-14 md:py-16">
-          <h2 class="text-lg font-bold tracking-tight text-neutral-950 sm:text-xl">A propos de moi</h2>
-          <p class="mt-6 max-w-3xl text-sm leading-relaxed text-neutral-800">
-            Salut, je suis Prospere Engeba développeur web junior avec une formation en ingénierie logicielle. Je conçois des applications web modernes, performantes et adaptées aux besoins réels.
+      <!-- Projets -->
+      <section id="projet" class="border-t border-white/5 px-5 py-20 sm:px-8 sm:py-24">
+        <div class="mx-auto max-w-6xl">
+          <h2 class="reveal text-center text-xl font-semibold tracking-tight text-white sm:text-2xl">Projets</h2>
+          <p class="mx-auto mt-3 max-w-lg text-center text-sm text-white/50">
+            Quelques réalisations — filtre par stack pour explorer.
           </p>
 
-          <h3 class="mt-10 text-base font-bold tracking-tight text-neutral-900 sm:text-lg">Compétences et outils</h3>
-          <div class="mt-6 flex flex-wrap gap-3 sm:grid sm:grid-cols-4 sm:gap-x-10 sm:gap-y-4">
-            <!-- Pill réutilisable: border + rounded-full -->
-            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Html / Css</span>
-            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Tailwind</span>
-            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Bootstrap</span>
-            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Figma</span>
-
-            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Django</span>
-            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Php</span>
-            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">MySQL</span>
-            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Docker</span>
-
-            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Git</span>
-            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Github</span>
-            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">Vagrant</span>
-            <span class="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold sm:w-full">AI enthusiast</span>
+          <div
+            id="project-filters"
+            class="mt-8 flex flex-wrap items-center justify-center gap-2"
+            role="group"
+            aria-label="Filtrer les projets"
+          >
+            <button type="button" class="project-filter is-active" data-filter="all" aria-pressed="true">Tous</button>
+            <button type="button" class="project-filter" data-filter="django" aria-pressed="false">Django</button>
+            <button type="button" class="project-filter" data-filter="adonis" aria-pressed="false">AdonisJS</button>
+            <button type="button" class="project-filter" data-filter="react" aria-pressed="false">React</button>
+            <button type="button" class="project-filter" data-filter="autres" aria-pressed="false">Autres</button>
           </div>
-        </section>
 
-        <!-- Projet récent -->
-        <section class="bg-white ring-1 ring-neutral-300 px-6 py-12 sm:px-12 sm:py-14 md:py-16">
-          <h2 class="text-lg font-bold tracking-tight text-neutral-950 sm:text-xl">Projet Récent</h2>
-
-          <div class="mx-auto mt-6 max-w-[620px] border border-neutral-300">
-            <div class="p-0">
-              <img
-                src="./images/desktop/home.png"
-                alt="EG-HOTEL"
-                class="w-full"
-                loading="lazy"
-              />
-            </div>
-            <div class="border-t border-neutral-300 p-6">
-              <div class="text-sm font-extrabold tracking-tight">EG-HOTEL</div>
-              <p class="mt-3 text-sm leading-relaxed text-neutral-800">
-                EgHotel est une plateforme qui permet aux hôtels de gérer leurs chambres, leurs clients et leurs revenus en toute simplicité
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <!-- Experience -->
-        <section class="bg-white ring-1 ring-neutral-300 px-6 py-12 sm:px-12 sm:py-14 md:py-16">
-          <h2 class="text-lg font-bold tracking-tight text-neutral-950 sm:text-xl">EXPERIENCE PROFESSIONNELLE</h2>
-
-          <div class="mt-6">
-            <div class="flex items-center justify-between gap-4">
-              <div>
-                <div class="text-sm font-medium">Stage Académique</div>
-                <div class="mt-3 text-sm font-semibold">SENAT, RDC</div>
-              </div>
-              <div class="inline-flex items-center gap-3 rounded-full border border-neutral-300 px-5 py-2 text-xs font-semibold text-neutral-900">
-                <span class="h-2.5 w-6 rounded-full bg-black"></span>
-                <span>MAI 2025 (1mois)</span>
-              </div>
-            </div>
-
-            <p class="mt-6 max-w-3xl text-sm leading-relaxed text-neutral-800">
-              Dans le cadre de mon stage académique au Sénat de la RDC, j’ai découvert l’environnement professionnel en échangeant avec différents agents. Ces interactions m’ont permis de mieux comprendre le fonctionnement de l’institution, tout en recueillant des informations utiles pour mon projet de mémoire de fin d’études.
-            </p>
-            <ul class="mt-5 list-disc space-y-1 pl-5 text-sm text-neutral-800">
-              <li>Réalisation d’un projet : système d’enregistrement des agents (PHP &amp; MySQL)</li>
-              <li>Acquisition de notions en réseau informatique</li>
-              <li>Mise en pratique des connaissances académiques et travail collaboratif</li>
-            </ul>
-
-            <div class="my-8 border-t border-dashed border-neutral-300"></div>
-
-            <div class="flex items-center justify-between gap-4">
-              <div>
-                <div class="mt-2 text-sm font-semibold">REGIDESO, RDC</div>
-              </div>
-              <div class="inline-flex items-center gap-3 rounded-full border border-neutral-300 px-5 py-2 text-xs font-semibold text-neutral-900">
-                <span class="h-2.5 w-6 rounded-full bg-black"></span>
-                <span>MAI 2024 (1mois)</span>
-              </div>
-            </div>
-
-            <p class="mt-6 max-w-3xl text-sm leading-relaxed text-neutral-800">
-              Dans le cadre de mon stage académique à la REGIDESO, j’ai découvert le fonctionnement d’une entreprise publique en participant aux activités quotidiennes et en collaborant avec une équipe de stagiaires.
-            </p>
-            <ul class="mt-5 list-disc space-y-1 pl-5 text-sm text-neutral-800">
-              <li>Travail collaboratif au sein d’une équipe de stagiaires</li>
-              <li>Réalisation d’un mini projet en groupe : gestion des équipements informatiques (PHP &amp; MySQL)</li>
-              <li>Répartition des tâches et exécution de travaux pratiques.</li>
-            </ul>
-          </div>
-        </section>
-
-        <!-- Formation -->
-        <section class="bg-white ring-1 ring-neutral-300 px-6 py-12 sm:px-12 sm:py-14 md:py-16">
-          <h2 class="text-lg font-bold tracking-tight text-neutral-950 sm:text-xl">FORMATION</h2>
-
-          <div class="mt-6">
-            <div class="flex items-start justify-between gap-4">
-              <div class="text-sm font-semibold">KADEA ACADEMY</div>
-              <div class="inline-flex items-center gap-3 rounded-full border border-neutral-300 px-5 py-2 text-xs font-semibold text-neutral-900">
-                <span class="h-2.5 w-6 rounded-full bg-black"></span>
-                <span>2026 - Présent</span>
-              </div>
-            </div>
-
-            <p class="mt-6 max-w-3xl text-sm leading-relaxed text-neutral-800">
-              Une formation intensive et complète en développement web qui permet de renforcer mes compétences techniques tout en développant les soft skills essentiels au monde professionnel. Elle combine pratique, projets concrets et travail collaboratif
-            </p>
-            <ul class="mt-5 list-disc space-y-1 pl-5 text-sm text-neutral-800">
-              <li>Développement frontend : HTML, CSS, Tailwind</li>
-              <li>Développement backend</li>
-              <li>Réalisation de projets pratiques et concrets</li>
-              <li>Utilisation d’outils modernes de développement</li>
-              <li>Travail en équipe et collaboration sur des projets</li>
-              <li>Développement des soft skills (communication, organisation, esprit critique)</li>
-            </ul>
-
-            <div class="my-8 border-t border-dashed border-neutral-300"></div>
-
-            <div class="flex items-start justify-between gap-4">
-              <div class="text-sm font-semibold">Centre de formation OGI</div>
-              <div class="inline-flex items-center gap-3 rounded-full border border-neutral-300 px-5 py-2 text-xs font-semibold text-neutral-900">
-                <span class="h-2.5 w-6 rounded-full bg-black"></span>
-                <span>2022 (3 mois)</span>
-              </div>
-            </div>
-
-            <p class="mt-6 max-w-3xl text-sm leading-relaxed text-neutral-800">
-              Cette formation a constitué mon premier pas dans le développement informatique, me permettant d’acquérir les bases essentielles et de découvrir le monde de la programmation.
-            </p>
-            <ul class="mt-5 list-disc space-y-1 pl-5 text-sm text-neutral-800">
-              <li>Compréhension des bases de la programmation</li>
-              <li>Initiation au développement web avec PHP</li>
-              <li>Première expérience concrète dans le développement</li>
-            </ul>
-          </div>
-        </section>
-
-        <!-- Education -->
-        <section class="bg-white ring-1 ring-neutral-300 px-6 py-12 sm:px-12 sm:py-14 md:py-16">
-          <h2 class="text-lg font-bold tracking-tight text-neutral-950 sm:text-xl">EDUCATION</h2>
-
-          <div class="mt-8 grid grid-cols-[120px_24px_minmax(0,1fr)] gap-x-6 gap-y-10 sm:grid-cols-[140px_28px_minmax(0,1fr)]">
-           
-            <div class="relative col-start-2 row-start-1 row-span-3">
-              <div class="pointer-events-none absolute left-1/2 top-2 bottom-2 w-px -translate-x-1/2 bg-neutral-300"></div>
-            </div>
-
-           
-            <div class="col-start-1 row-start-1 text-sm text-neutral-600">2021 - 2025</div>
-            <div class="relative col-start-2 row-start-1 flex justify-center">
-              <div class="relative z-10 mt-2 grid h-4 w-4 place-items-center rounded-full border border-neutral-400 bg-white">
-                <span class="h-1.5 w-1.5 rounded-full bg-black"></span>
-              </div>
-            </div>
-            <div class="col-start-3 row-start-1">
-              <div class="text-sm font-semibold text-center sm:text-left">UPC</div>
-              <div class="mt-2 text-sm text-neutral-800">
-                Licence en Sciences Informatiques<br />
-                Option Ingénierie Logicielle (Bac+4)
-              </div>
-            </div>
-
-           
-            <div class="col-start-1 row-start-2 text-sm text-neutral-600">2015 - 2021</div>
-            <div class="relative col-start-2 row-start-2 flex justify-center">
-              <div class="relative z-10 mt-2 grid h-4 w-4 place-items-center rounded-full border border-neutral-400 bg-white">
-                <span class="h-1.5 w-1.5 rounded-full bg-black"></span>
-              </div>
-            </div>
-            <div class="col-start-3 row-start-2">
-              <div class="text-sm font-semibold text-center sm:text-left">Collège Notre Dame Du Congo(CNDC)</div>
-              <div class="mt-2 text-sm text-neutral-800">Diplôme D’état en Biologie - Chimie</div>
-            </div>
-
-           
-            <div class="col-start-1 row-start-3 text-sm text-neutral-600">2007 - 2015</div>
-            <div class="relative col-start-2 row-start-3 flex justify-center">
-              <div class="relative z-10 mt-2 grid h-4 w-4 place-items-center rounded-full border border-neutral-400 bg-white">
-                <span class="h-1.5 w-1.5 rounded-full bg-black"></span>
-              </div>
-            </div>
-            <div class="col-start-3 row-start-3">
-              <div class="text-sm font-semibold text-center sm:text-left">Complexe Scolaire LOLIKI</div>
-              <div class="mt-2 text-sm text-neutral-800">Ecole Maternelle et Primaire</div>
-            </div>
-          </div>
-        </section>
-         <!-- Contact -->
-        <section id="contact" class="bg-white ring-1 ring-neutral-300 px-6 py-12 sm:px-12 sm:py-14 md:py-16">
-          <h2 class="text-lg font-bold tracking-tight text-neutral-950 sm:text-xl">Contact</h2>
-          <p class="mt-6 max-w-3xl text-sm leading-relaxed text-neutral-800">
-            Une question, une opportunité, ou un projet à discuter ? Écris-moi et je te réponds dès que possible.
-          </p>
-
-          <div class="mt-8 grid items-start gap-8 lg:grid-cols-2">
-            <div class="rounded-2xl border border-neutral-200 bg-neutral-50 p-6">
-              <div class="text-sm font-semibold text-neutral-950">Mes coordonnées</div>
-              <div class="mt-4 space-y-3 text-sm text-neutral-800">
-                <div class="flex items-center justify-between gap-4 rounded-xl bg-white px-4 py-3">
-                  <span class="text-xs font-medium text-neutral-600">Ville</span>
-                  <span class="text-sm font-medium text-neutral-900">Kinshasa, RDC</span>
+          <div id="project-grid" class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <!-- Aide Scrabble -->
+            <article class="project-card reveal" style="--reveal-delay: 60ms" data-stack="django">
+              <div class="project-card__media" aria-hidden="true">
+                <div class="project-card__placeholder">
+                  <span>Aperçu bientôt</span>
                 </div>
+              </div>
+              <div class="flex flex-1 flex-col p-5">
+                <h3 class="text-lg font-semibold tracking-tight text-white">Aide Scrabble</h3>
+                <p class="mt-2 text-sm leading-relaxed text-white/55">
+                  Application web qui permet d’entrer vos lettres et d’obtenir les mots possibles, avec scores et
+                  jokers.
+                </p>
+                <div class="mt-auto flex flex-wrap gap-2 pt-4">
+                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">Django</span>
+                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">MySQL</span>
+                </div>
+              </div>
+            </article>
 
+            <!-- Génération des documents -->
+            <article class="project-card reveal" style="--reveal-delay: 140ms" data-stack="django">
+              <div class="project-card__media" aria-hidden="true">
+                <span class="project-card__badge">En développement</span>
+                <div class="project-card__placeholder">
+                  <span>Aperçu bientôt</span>
+                </div>
+              </div>
+              <div class="flex flex-1 flex-col p-5">
+                <h3 class="text-lg font-semibold tracking-tight text-white">Génération des documents</h3>
+                <p class="mt-2 text-sm leading-relaxed text-white/55">
+                  Génération en masse de supports personnalisés (invitations, badges, certificats…) à partir d’une
+                  maquette, de champs dynamiques et d’une liste de personnes.
+                </p>
+                <div class="mt-auto flex flex-wrap gap-2 pt-4">
+                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">Django</span>
+                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">PostgreSQL</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Gestionnaire de projet -->
+            <article class="project-card reveal" style="--reveal-delay: 220ms" data-stack="autres">
+              <div class="project-card__media" aria-hidden="true">
+                <div class="project-card__placeholder">
+                  <span>Aperçu bientôt</span>
+                </div>
+              </div>
+              <div class="flex flex-1 flex-col p-5">
+                <h3 class="text-lg font-semibold tracking-tight text-white">Gestionnaire de projet</h3>
+                <p class="mt-2 text-sm leading-relaxed text-white/55">
+                  App personnelle de planification des projets, idées et tâches.
+                </p>
+                <div class="mt-auto flex flex-wrap gap-2 pt-4">
+                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">HTML</span>
+                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">CSS</span>
+                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">JavaScript</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Raccourciseur d'URL -->
+            <article class="project-card reveal" style="--reveal-delay: 300ms" data-stack="adonis">
+              <div class="project-card__media" aria-hidden="true">
+                <div class="project-card__placeholder">
+                  <span>Aperçu bientôt</span>
+                </div>
+              </div>
+              <div class="flex flex-1 flex-col p-5">
+                <h3 class="text-lg font-semibold tracking-tight text-white">Raccourcisseur d’URL</h3>
+                <p class="mt-2 text-sm leading-relaxed text-white/55">
+                  Service pour raccourcir et partager des liens rapidement.
+                </p>
+                <div class="mt-auto flex flex-wrap gap-2 pt-4">
+                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">AdonisJS</span>
+                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">TypeScript</span>
+                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">PostgreSQL</span>
+                </div>
+              </div>
+            </article>
+
+            <p id="project-empty" class="project-empty" role="status">
+              Aucun projet pour ce filtre — d’autres arrivent bientôt.
+            </p>
+          </div>
+
+          <p class="mt-10 flex items-center justify-center gap-2 text-center text-sm text-white/45">
+            <span
+              class="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#9ec0e0]"
+              aria-hidden="true"
+            ></span>
+            D’autres projets sont en développement
+          </p>
+        </div>
+      </section>
+
+      <!-- Parcours -->
+      <section id="parcours" class="border-t border-white/5 px-5 py-20 sm:px-8 sm:py-24">
+        <div class="mx-auto max-w-3xl">
+          <h2 class="reveal text-center text-xl font-semibold tracking-tight text-white sm:text-2xl">Parcours</h2>
+
+          <!-- Formation -->
+          <div class="mt-14">
+            <h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-white/40">Formation</h3>
+
+            <div class="mt-6 space-y-8">
+              <article class="rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-6">
+                <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <h4 class="text-lg font-semibold text-white">KADEA Academy</h4>
+                  <span class="inline-flex w-fit items-center rounded-full border border-white/12 px-3 py-1 text-xs font-medium text-white/70">
+                    2026 — Présent
+                  </span>
+                </div>
+                <p class="mt-4 text-sm leading-relaxed text-white/55">
+                  Formation intensive en développement web : pratique, projets concrets, outils modernes et soft
+                  skills.
+                </p>
+                <ul class="mt-4 list-disc space-y-1.5 pl-5 text-sm text-white/55">
+                  <li>Frontend : HTML, CSS, JavaScript, Tailwind, Figma</li>
+                  <li>Backend : AdonisJS / TypeScript</li>
+                  <li>Bases de données : SQL</li>
+                  <li>Projets pratiques</li>
+                  <li>Soft skills : communication, travail en équipe, organisation</li>
+                </ul>
+              </article>
+
+              <article class="rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-6">
+                <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <h4 class="text-lg font-semibold text-white">Centre de formation OGI</h4>
+                  <span class="inline-flex w-fit items-center rounded-full border border-white/12 px-3 py-1 text-xs font-medium text-white/70">
+                    2022 · 3 mois
+                  </span>
+                </div>
+                <p class="mt-4 text-sm leading-relaxed text-white/55">
+                  Premiers pas en programmation et initiation au développement web avec PHP.
+                </p>
+              </article>
+            </div>
+          </div>
+
+          <!-- Stages -->
+          <div class="mt-14">
+            <h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-white/40">Stages</h3>
+
+            <div class="mt-6 space-y-8">
+              <article class="rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-6">
+                <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <p class="text-xs font-medium text-white/45">Stage académique</p>
+                    <h4 class="mt-1 text-lg font-semibold text-white">Sénat, RDC</h4>
+                  </div>
+                  <span class="inline-flex w-fit items-center rounded-full border border-white/12 px-3 py-1 text-xs font-medium text-white/70">
+                    Mai 2025 · 1 mois
+                  </span>
+                </div>
+                <p class="mt-4 text-sm leading-relaxed text-white/55">
+                  Découverte de l’environnement professionnel en échangeant avec différents agents. Ces interactions
+                  m’ont permis de mieux comprendre le fonctionnement de l’institution, tout en recueillant des
+                  informations utiles pour mon mémoire de fin d’études.
+                </p>
+                <ul class="mt-4 list-disc space-y-1 pl-5 text-sm text-white/55">
+                  <li>Système d’enregistrement des agents (PHP &amp; MySQL)</li>
+                  <li>Notions en réseau informatique</li>
+                  <li>Travail collaboratif et mise en pratique académique</li>
+                </ul>
+              </article>
+
+              <article class="rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-6">
+                <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <p class="text-xs font-medium text-white/45">Stage académique</p>
+                    <h4 class="mt-1 text-lg font-semibold text-white">REGIDESO, RDC</h4>
+                  </div>
+                  <span class="inline-flex w-fit items-center rounded-full border border-white/12 px-3 py-1 text-xs font-medium text-white/70">
+                    Mai 2024 · 1 mois
+                  </span>
+                </div>
+                <p class="mt-4 text-sm leading-relaxed text-white/55">
+                  Immersion dans une entreprise publique, participation aux activités quotidiennes et collaboration
+                  avec une équipe de stagiaires.
+                </p>
+                <ul class="mt-4 list-disc space-y-1 pl-5 text-sm text-white/55">
+                  <li>Mini-projet : gestion des équipements informatiques (PHP &amp; MySQL)</li>
+                  <li>Répartition des tâches et travaux pratiques</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+
+          <!-- Éducation -->
+          <div class="mt-14">
+            <h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-white/40">Éducation</h3>
+
+            <ol class="mt-6 space-y-0">
+              <li class="grid gap-2 border-t border-white/10 py-5 sm:grid-cols-[8.5rem_1fr] sm:gap-8">
+                <p class="text-sm text-white/40">2021 — 2025</p>
+                <div>
+                  <p class="font-semibold text-white">UPC</p>
+                  <p class="mt-1 text-sm text-white/55">
+                    Licence en Sciences Informatiques — Ingénierie Logicielle (Bac+4)
+                  </p>
+                </div>
+              </li>
+              <li class="grid gap-2 border-t border-white/10 py-5 sm:grid-cols-[8.5rem_1fr] sm:gap-8">
+                <p class="text-sm text-white/40">2015 — 2021</p>
+                <div>
+                  <p class="font-semibold text-white">Collège Notre Dame Du Congo</p>
+                  <p class="mt-1 text-sm text-white/55">Diplôme d’État en Biologie-Chimie</p>
+                </div>
+              </li>
+              <li class="grid gap-2 border-t border-white/10 py-5 sm:grid-cols-[8.5rem_1fr] sm:gap-8">
+                <p class="text-sm text-white/40">2007 — 2015</p>
+                <div>
+                  <p class="font-semibold text-white">Complexe Scolaire LOLIKI</p>
+                  <p class="mt-1 text-sm text-white/55">École maternelle et primaire</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="border-t border-white/5 px-5 py-20 sm:px-8 sm:py-24">
+        <div class="mx-auto max-w-5xl">
+          <h2 class="reveal text-center text-xl font-semibold tracking-tight text-white sm:text-2xl">Contact</h2>
+          <p class="mx-auto mt-3 max-w-lg text-center text-sm text-white/50">
+            Une question, une opportunité, ou un projet à discuter ? Écris-moi.
+          </p>
+
+          <div class="mt-12 grid items-start gap-6 lg:grid-cols-2">
+            <!-- Coordonnées -->
+            <div class="rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-7">
+              <h3 class="text-sm font-semibold text-white">Mes coordonnées</h3>
+              <div class="mt-5 space-y-3">
+                <div class="flex items-center justify-between gap-4 rounded-xl border border-white/8 bg-void px-4 py-3.5">
+                  <span class="text-xs font-medium text-white/45">Ville</span>
+                  <span class="text-sm font-medium text-white/90">Kinshasa, RDC</span>
+                </div>
                 <a
                   href="https://wa.me/243895467658"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="flex items-center justify-between gap-4 rounded-xl bg-white px-4 py-3 transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40"
+                  class="flex items-center justify-between gap-4 rounded-xl border border-white/8 bg-void px-4 py-3.5 transition hover:border-white/16 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
                 >
-                  <span class="text-xs font-medium text-neutral-600">WhatsApp</span>
-                  <span class="text-sm font-semibold text-neutral-900">+243 895 467 658</span>
+                  <span class="text-xs font-medium text-white/45">WhatsApp</span>
+                  <span class="text-sm font-semibold text-white">+243 895 467 658</span>
                 </a>
-
-                <div class="flex items-center justify-between gap-4 rounded-xl bg-white px-4 py-3">
-                  <span class="text-xs font-medium text-neutral-600">Email</span>
-                  <span class="text-sm font-medium text-neutral-900">engebaprospere@gmail.com</span>
-                </div>
+                <a
+                  href="mailto:engebaprospere@gmail.com"
+                  class="flex items-center justify-between gap-4 rounded-xl border border-white/8 bg-void px-4 py-3.5 transition hover:border-white/16 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
+                >
+                  <span class="text-xs font-medium text-white/45">Email</span>
+                  <span class="text-sm font-medium text-white/90">engebaprospere@gmail.com</span>
+                </a>
               </div>
 
               <div class="mt-6 flex items-center gap-2">
                 <a
-                  href="https://www.facebook.com/prospere.egmon"
+                  href="https://www.linkedin.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="grid h-10 w-10 place-items-center rounded-full border border-neutral-200 bg-white transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40"
-                  aria-label="Facebook — Prospere Egmon"
+                  class="grid h-10 w-10 place-items-center rounded-full border border-white/12 text-white/70 transition hover:border-white/25 hover:bg-white/[0.04] hover:text-white"
+                  aria-label="LinkedIn"
                 >
-                  <img src="./images/icon/facebook.png" alt="" class="h-4 w-4 object-contain" />
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M6.94 8.5H4.25V19h2.69V8.5ZM5.6 7.3a1.56 1.56 0 1 0 0-3.12 1.56 1.56 0 0 0 0 3.12ZM19.75 19h-2.69v-5.2c0-1.24-.02-2.83-1.72-2.83-1.73 0-2 1.35-2 2.74V19H10.66V8.5h2.58v1.43h.04c.36-.68 1.24-1.4 2.55-1.4 2.73 0 3.23 1.8 3.23 4.13V19Z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://wa.me/243895467658"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="grid h-10 w-10 place-items-center rounded-full border border-white/12 transition hover:border-white/25 hover:bg-white/[0.04]"
+                  aria-label="WhatsApp"
+                >
+                  <img src="./images/icon/whatsapp.png" alt="" class="h-4 w-4 object-contain brightness-0 invert" />
                 </a>
                 <a
                   href="https://www.instagram.com/prospere_egmon/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="grid h-10 w-10 place-items-center rounded-full border border-neutral-200 bg-white transition hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40"
+                  class="grid h-10 w-10 place-items-center rounded-full border border-white/12 transition hover:border-white/25 hover:bg-white/[0.04]"
                   aria-label="Instagram — prospere_egmon"
                 >
-                  <img src="./images/icon/instagram.png" alt="" class="h-4 w-4 object-contain" />
+                  <img src="./images/icon/instagram.png" alt="" class="h-4 w-4 object-contain brightness-0 invert" />
+                </a>
+                <a
+                  href="https://www.facebook.com/prospere.egmon"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="grid h-10 w-10 place-items-center rounded-full border border-white/12 transition hover:border-white/25 hover:bg-white/[0.04]"
+                  aria-label="Facebook — Prospere Egmon"
+                >
+                  <img src="./images/icon/facebook.png" alt="" class="h-4 w-4 object-contain brightness-0 invert" />
                 </a>
               </div>
             </div>
 
-            <form class="rounded-2xl border border-neutral-200 bg-white p-6" action="#" method="post">
-              <div class="text-sm font-semibold text-neutral-950">Laisse un message</div>
-              <div class="mt-4 space-y-4">
+            <!-- Formulaire -->
+            <form class="rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-7" action="#" method="post">
+              <h3 class="text-sm font-semibold text-white">Laisse un message</h3>
+              <div class="mt-5 space-y-4">
                 <label class="block">
-                  <span class="text-xs font-medium text-neutral-700">Nom</span>
+                  <span class="text-xs font-medium text-white/50">Nom</span>
                   <input
                     type="text"
                     name="name"
                     autocomplete="name"
-                    class="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-neutral-300 focus:ring-2 focus:ring-neutral-400/20"
+                    class="mt-2 w-full rounded-xl border border-white/10 bg-void px-4 py-3 text-sm text-white outline-none transition placeholder:text-white/30 focus:border-white/25 focus:ring-2 focus:ring-glow/30"
                     placeholder="Ton nom"
                   />
                 </label>
-
                 <label class="block">
-                  <span class="text-xs font-medium text-neutral-700">Email</span>
+                  <span class="text-xs font-medium text-white/50">Email</span>
                   <input
                     type="email"
                     name="email"
                     autocomplete="email"
-                    class="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-neutral-300 focus:ring-2 focus:ring-neutral-400/20"
+                    class="mt-2 w-full rounded-xl border border-white/10 bg-void px-4 py-3 text-sm text-white outline-none transition placeholder:text-white/30 focus:border-white/25 focus:ring-2 focus:ring-glow/30"
                     placeholder="ton.email@exemple.com"
                   />
                 </label>
-
                 <label class="block">
-                  <span class="text-xs font-medium text-neutral-700">Message</span>
+                  <span class="text-xs font-medium text-white/50">Message</span>
                   <textarea
                     name="message"
                     rows="5"
-                    class="mt-2 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-neutral-300 focus:ring-2 focus:ring-neutral-400/20"
+                    class="mt-2 w-full resize-y rounded-xl border border-white/10 bg-void px-4 py-3 text-sm text-white outline-none transition placeholder:text-white/30 focus:border-white/25 focus:ring-2 focus:ring-glow/30"
                     placeholder="Décris ton besoin…"
                   ></textarea>
                 </label>
-
-                <button
-                  type="submit"
-                  class="inline-flex w-full items-center justify-center rounded-xl bg-neutral-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400/40"
-                >
-                  Envoyer
-                </button>
+                <button type="submit" class="btn-primary w-full min-h-12">Envoyer</button>
               </div>
             </form>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
+    </main>
 
-      <!-- Footer -->
-      <footer
-        id="contact"
-        class="mx-auto w-full max-w-[960px] bg-white ring-1 ring-neutral-300 px-6 py-12 text-center sm:px-12 sm:py-14 md:py-16"
-      >
-        <div class="text-sm text-neutral-900">2026 © Designed by <span class="font-extrabold">EGMON</span></div>
-      </footer>
-    </body>
+    <footer class="border-t border-white/5 px-5 py-10 text-center sm:px-8">
+      <p class="text-sm text-white/40">
+        2026 © Designed by <span class="font-semibold text-white/70">EGMON</span>
+      </p>
+    </footer>
+
+    <script>
+      (function () {
+        const header = document.getElementById('site-header');
+        const burger = document.getElementById('burger-btn');
+        const panel = document.getElementById('mobile-panel');
+        const threshold = 24;
+        let ticking = false;
+
+        function updateHeader() {
+          const scrolled = window.scrollY > threshold;
+          header.classList.toggle('is-scrolled', scrolled);
+          ticking = false;
+        }
+
+        window.addEventListener(
+          'scroll',
+          function () {
+            if (!ticking) {
+              window.requestAnimationFrame(updateHeader);
+              ticking = true;
+            }
+          },
+          { passive: true }
+        );
+
+        updateHeader();
+
+        function setMenuOpen(open) {
+          burger.classList.toggle('is-open', open);
+          panel.classList.toggle('is-open', open);
+          panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+          burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+          burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+          document.body.classList.toggle('menu-open', open);
+        }
+
+        burger.addEventListener('click', function () {
+          setMenuOpen(!panel.classList.contains('is-open'));
+        });
+
+        panel.querySelectorAll('.mobile-link').forEach(function (link) {
+          link.addEventListener('click', function () {
+            setMenuOpen(false);
+          });
+        });
+
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && panel.classList.contains('is-open')) {
+            setMenuOpen(false);
+            burger.focus();
+          }
+        });
+
+        window.addEventListener('resize', function () {
+          if (window.innerWidth >= 768 && panel.classList.contains('is-open')) {
+            setMenuOpen(false);
+          }
+        });
+
+        /* Filtre projets */
+        const filterBar = document.getElementById('project-filters');
+        const projectCards = document.querySelectorAll('#project-grid .project-card');
+        const projectEmpty = document.getElementById('project-empty');
+
+        if (filterBar) {
+          filterBar.addEventListener('click', function (e) {
+            const btn = e.target.closest('.project-filter');
+            if (!btn) return;
+
+            const filter = btn.getAttribute('data-filter');
+            filterBar.querySelectorAll('.project-filter').forEach(function (b) {
+              const active = b === btn;
+              b.classList.toggle('is-active', active);
+              b.setAttribute('aria-pressed', active ? 'true' : 'false');
+            });
+
+            let visible = 0;
+            projectCards.forEach(function (card) {
+              const stack = card.getAttribute('data-stack');
+              const show = filter === 'all' || stack === filter;
+              card.classList.toggle('is-hidden', !show);
+              if (show) {
+                card.classList.add('is-in');
+                visible += 1;
+              }
+            });
+
+            if (projectEmpty) {
+              projectEmpty.classList.toggle('is-visible', visible === 0);
+            }
+          });
+        }
+
+        /* Révélation légère au scroll */
+        const revealEls = document.querySelectorAll('.reveal');
+        const prefersReduced =
+          window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (prefersReduced || !('IntersectionObserver' in window)) {
+          revealEls.forEach(function (el) {
+            el.classList.add('is-in');
+          });
+        } else {
+          const revealObserver = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('is-in');
+                  revealObserver.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.14, rootMargin: '0px 0px -6% 0px' }
+          );
+
+          revealEls.forEach(function (el) {
+            revealObserver.observe(el);
+          });
+        }
+      })();
+    </script>
+  </body>
 </html>

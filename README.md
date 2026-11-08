@@ -1,32 +1,31 @@
-# Portfolio - Projet1 Kadea
+# Portfolio — Egmon
 
-## Description
-Ce projet est un portfolio réalisé dans le cadre du projet de fin de module.  
-Il a pour objectif de présenter mes compétences en développement web.
+Portfolio de Prospere Engeba. Il rassemble mes idées de projets, avec pour chacune une présentation, les technologies et, quand il existe, le lien vers l’application.
 
----
+## Pages
 
-## Technologies utilisées
-- HTML5
-- CSS3
+- Accueil
+- Projets, avec une fiche pour chaque idée
+- Parcours
+- Contact
+
+## Idées présentées
+
+- Aide Scrabble
+- Génération des documents
+- Kadea Chat
+- NGL
+- Raccourcisseur d’URL
+
+Certaines sont en ligne, d’autres encore en développement. Le détail, la stack et les liens sont sur la fiche du projet.
+
+## Technologies
+
+- HTML
+- CSS
+- JavaScript
 - Tailwind CSS
-- Git & GitHub
-
---- 
-
-##  Objectifs du projet
-- Apprendre les bases du développement web
-- Utiliser Git et GitHub correctement
-- Structurer un projet web proprement
-- Créer un portfolio personnel
-
----
-
-## Lien utile
-https://www.figma.com/design/o4oTSPqaD3xBHKFTbjORWO/Untitled?node-id=0-1&t=5iSRYwK92EpXHufW-1
-
----
 
 ## Auteur
-- Prospere Engeba 
 
+Prospere Engeba — Kinshasa, RDC

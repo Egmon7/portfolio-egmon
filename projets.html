@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <script>
+      try {
+        if (localStorage.getItem("theme") === "light") document.documentElement.setAttribute("data-theme", "light");
+      } catch (e) {}
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projets — Egmon</title>
+    <link rel="icon" href="./images/logo_egmon.jpeg" type="image/jpeg" />
+    <meta
+      name="description"
+      content="Projets de Prospere Engeba : Aide Scrabble, génération de documents, Kadea Chat, NGL et raccourcisseur d’URL."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              void: '#0a0a0a',
+              glow: '#163f6b',
+              glowDeep: '#122b46',
+              cardHover: '#0d131d',
+            },
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'sans-serif'],
+              display: ['"Playfair Display"', 'Georgia', 'serif'],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+
+  <body class="landing min-h-dvh font-sans text-white antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-white focus:px-4 focus:py-2 focus:text-void"
+    >
+      Aller au contenu
+    </a>
+
+    <header id="site-header" class="landing-header">
+      <nav class="landing-nav mx-auto flex h-[4.25rem] max-w-6xl items-center px-5 sm:px-8" aria-label="Navigation principale">
+        <a href="./index.html" class="text-[1.35rem] font-medium tracking-tight">Egmon</a>
+
+        <div class="landing-links ml-10 hidden items-center gap-10 text-sm font-medium md:flex lg:ml-16 lg:gap-14">
+          <a href="./projets.html" aria-current="page">Projets</a>
+          <a href="./parcours.html">Parcours</a>
+        </div>
+
+        <div class="ml-auto flex items-center gap-2">
+          <a href="./contact.html" class="landing-connect hidden sm:inline-flex">
+            Contactez-moi
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+
+          <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false">
+            <svg class="theme-toggle__sun" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" />
+              <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+            <svg class="theme-toggle__moon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M20 14.5A7.5 7.5 0 0 1 9.5 4 7.2 7.2 0 1 0 20 14.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            id="burger-btn"
+            class="burger-btn"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false"
+            aria-controls="mobile-panel"
+          >
+            <svg class="icon-burger" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+            <svg class="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <div id="mobile-panel" class="mobile-panel" aria-hidden="true">
+      <nav class="flex h-full min-h-0 w-full flex-1 flex-col" aria-label="Navigation mobile">
+        <div class="flex flex-col gap-1 text-xl font-medium">
+          <a href="./index.html" class="mobile-link rounded-xl px-4 py-4 text-white/90 hover:bg-white/5 hover:text-white">Home</a>
+          <a href="./projets.html" class="mobile-link is-active rounded-xl px-4 py-4 text-white/90 hover:bg-white/5 hover:text-white" aria-current="page">Projets</a>
+          <a href="./parcours.html" class="mobile-link rounded-xl px-4 py-4 text-white/90 hover:bg-white/5 hover:text-white">Parcours</a>
+        </div>
+
+        <div class="mt-auto space-y-5 border-t border-white/10 pt-6">
+          <a href="./contact.html" class="btn-primary mobile-link w-full min-h-12">Contactez-moi</a>
+
+          <div class="flex items-center justify-center gap-3">
+            <a
+              href="https://www.linkedin.com/in/prospere-engeba-04991924a"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="grid h-11 w-11 place-items-center rounded-full border border-white/12 bg-white/[0.04] text-white/80"
+              aria-label="LinkedIn — Prospere Engeba"
+              title="LinkedIn — Prospere Engeba"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M6.94 8.5H4.25V19h2.69V8.5ZM5.6 7.3a1.56 1.56 0 1 0 0-3.12 1.56 1.56 0 0 0 0 3.12ZM19.75 19h-2.69v-5.2c0-1.24-.02-2.83-1.72-2.83-1.73 0-2 1.35-2 2.74V19H10.66V8.5h2.58v1.43h.04c.36-.68 1.24-1.4 2.55-1.4 2.73 0 3.23 1.8 3.23 4.13V19Z" />
+              </svg>
+            </a>
+            <a
+              href="https://wa.me/243895467658"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="grid h-11 w-11 place-items-center rounded-full border border-white/12 bg-white/[0.04]"
+              aria-label="WhatsApp — 0895 467 658"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-5 w-5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            </a>
+            <a
+              href="https://www.instagram.com/prospere_egmon/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="grid h-11 w-11 place-items-center rounded-full border border-white/12 bg-white/[0.04]"
+              aria-label="Instagram — prospere egmon"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-5 w-5"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.26.07 1.64.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07ZM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63A5.9 5.9 0 0 0 2.01 2.01 5.9 5.9 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91a5.9 5.9 0 0 0 1.38 2.13 5.9 5.9 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63C19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0Zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z"/></svg>
+            </a>
+            <a
+              href="https://www.facebook.com/prospere.egmon"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="grid h-11 w-11 place-items-center rounded-full border border-white/12 bg-white/[0.04]"
+              aria-label="Facebook — prospere egmon"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-5 w-5"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073Z"/></svg>
+            </a>
+          </div>
+
+          <p class="text-center text-xs text-white/35">Kinshasa, RDC · Prospere Engeba</p>
+        </div>
+      </nav>
+    </div>
+
+    <main id="main">
+      <section class="px-5 pb-16 pt-28 sm:px-8 sm:pb-20 sm:pt-32">
+        <div class="mx-auto max-w-6xl">
+          <h1 class="reveal text-center text-3xl font-medium tracking-tight text-white sm:text-4xl">Projets</h1>
+          <p class="mx-auto mt-3 max-w-lg text-center text-sm text-white/50">
+            Quelques réalisations — filtre par stack pour explorer.
+          </p>
+
+          <div
+            id="project-filters"
+            class="mt-8 flex flex-wrap items-center justify-center gap-2"
+            role="group"
+            aria-label="Filtrer les projets"
+          >
+            <button type="button" class="project-filter is-active" data-filter="all" aria-pressed="true">Tous</button>
+            <button type="button" class="project-filter" data-filter="django" aria-pressed="false">Django</button>
+            <button type="button" class="project-filter" data-filter="adonis" aria-pressed="false">AdonisJS</button>
+            <button type="button" class="project-filter" data-filter="react" aria-pressed="false">React</button>
+            <button type="button" class="project-filter" data-filter="autres" aria-pressed="false">Autres</button>
+          </div>
+
+          <div id="project-grid" class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <p id="project-empty" class="project-empty" role="status">
+              Aucun projet pour ce filtre — d’autres arrivent bientôt.
+            </p>
+          </div>
+
+          <p class="mt-10 text-center text-sm text-white/40">D’autres projets sont en développement</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="landing-footer">
+      <div class="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-14">
+        <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div>
+            <a href="./index.html" class="text-xl font-medium tracking-tight">Egmon</a>
+            <p class="mt-3 max-w-xs text-sm leading-relaxed text-white/55">
+              Applications web modernes et performantes, pensées pour des besoins réels. Basé à Kinshasa.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-sm font-semibold">Liens</h2>
+            <div class="mt-3 flex flex-col gap-2 text-sm text-white/55">
+              <a class="w-fit transition hover:text-white" href="./projets.html" aria-current="page">Projets</a>
+              <a class="w-fit transition hover:text-white" href="./parcours.html">Parcours</a>
+              <a class="w-fit transition hover:text-white" href="./contact.html">Contact</a>
+            </div>
+          </div>
+
+          <div>
+            <h2 class="text-sm font-semibold">Social</h2>
+            <div class="mt-3 flex gap-2">
+              <a
+                href="https://www.linkedin.com/in/prospere-engeba-04991924a"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="grid h-9 w-9 place-items-center rounded-md text-white/80 transition hover:bg-white/5 hover:text-white"
+                aria-label="LinkedIn — Prospere Engeba"
+                title="LinkedIn — Prospere Engeba"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M6.94 8.5H4.25V19h2.69V8.5ZM5.6 7.3a1.56 1.56 0 1 0 0-3.12 1.56 1.56 0 0 0 0 3.12ZM19.75 19h-2.69v-5.2c0-1.24-.02-2.83-1.72-2.83-1.73 0-2 1.35-2 2.74V19H10.66V8.5h2.58v1.43h.04c.36-.68 1.24-1.4 2.55-1.4 2.73 0 3.23 1.8 3.23 4.13V19Z" />
+                </svg>
+              </a>
+              <a
+                href="https://wa.me/243895467658"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="grid h-9 w-9 place-items-center rounded-md transition hover:bg-white/5"
+                aria-label="WhatsApp — 0895 467 658"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-4 w-4"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              </a>
+              <a
+                href="https://www.instagram.com/prospere_egmon/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="grid h-9 w-9 place-items-center rounded-md transition hover:bg-white/5"
+                aria-label="Instagram — prospere egmon"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-4 w-4"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.26.07 1.64.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07ZM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63A5.9 5.9 0 0 0 2.01 2.01 5.9 5.9 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91a5.9 5.9 0 0 0 1.38 2.13 5.9 5.9 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63C19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0Zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z"/></svg>
+              </a>
+              <a
+                href="https://www.facebook.com/prospere.egmon"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="grid h-9 w-9 place-items-center rounded-md transition hover:bg-white/5"
+                aria-label="Facebook — prospere egmon"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-4 w-4"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073Z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-white/45 sm:flex-row sm:items-center sm:justify-between">
+          <p>2026 © Designed by <span class="font-medium text-white/70">EGMON</span></p>
+          <p>Kinshasa, RDC</p>
+        </div>
+      </div>
+    </footer>
+
+
+    <script src="./js/projects.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>

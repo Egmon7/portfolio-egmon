@@ -1,9 +1,15 @@
 <!doctype html>
 <html lang="fr">
   <head>
+    <script>
+      try {
+        if (localStorage.getItem("theme") === "light") document.documentElement.setAttribute("data-theme", "light");
+      } catch (e) {}
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Egmon — Prospere Engeba</title>
+    <link rel="icon" href="./images/logo_egmon.jpeg" type="image/jpeg" />
     <meta
       name="description"
       content="Portfolio de Prospere Engeba, développeur web junior à Kinshasa — applications web modernes et performantes."
@@ -35,453 +41,189 @@
         },
       };
     </script>
-
+    <link rel="stylesheet" href="./css/styles.css" />
     <style>
-      html {
-        scroll-behavior: smooth;
-        /* Offset = hauteur réelle de la nav fixe (évite de s’arrêter trop tôt) */
-        scroll-padding-top: 5.75rem;
+      .landing-title {
+        background: linear-gradient(180deg, #e8f2fb 0%, #f5f7f8 42%, #ffffff 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-size: clamp(2.35rem, 5.6vw, 3.75rem);
+        font-weight: 500;
+        letter-spacing: -0.045em;
+        line-height: 1.08;
       }
 
-      @media (prefers-reduced-motion: reduce) {
-        html {
-          scroll-behavior: auto;
-        }
-        *,
-        *::before,
-        *::after {
-          transition-duration: 0.01ms !important;
-          animation-duration: 0.01ms !important;
-        }
-      }
-
-      /* Micro-révélation au scroll (titres + cards) */
-      .reveal {
-        opacity: 0;
-        transform: translateY(1.1rem);
-        transition:
-          opacity 550ms ease,
-          transform 550ms ease;
-        transition-delay: var(--reveal-delay, 0ms);
-        will-change: opacity, transform;
-      }
-
-      .reveal.is-in {
-        opacity: 1;
-        transform: none;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .reveal {
-          opacity: 1;
-          transform: none;
-          transition: none;
-          will-change: auto;
-        }
-      }
-
-      body {
-        background-color: #0a0a0a;
-        background-image:
-          radial-gradient(ellipse 55% 45% at 8% 0%, rgba(22, 63, 107, 0.55), transparent 60%),
-          radial-gradient(ellipse 50% 40% at 92% 0%, rgba(18, 43, 70, 0.5), transparent 58%),
-          radial-gradient(ellipse 40% 30% at 50% 35%, rgba(22, 63, 107, 0.12), transparent 70%);
-        background-attachment: fixed;
-      }
-
-      /* Header shell — always fixed */
-      .site-header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 50;
-        display: flex;
-        justify-content: center;
-        padding: 1.25rem 1rem 0;
-        pointer-events: none;
-        transition: padding 280ms ease;
-      }
-
-      .site-header.is-scrolled {
-        padding: 0.85rem 1rem 0;
-      }
-
-      /* Nav — état normal (début) */
-      .site-nav {
-        pointer-events: auto;
-        width: 100%;
-        max-width: 72rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        padding: 0.65rem 0.5rem;
-        border-radius: 9999px;
-        border: 1px solid transparent;
-        background: transparent;
-        backdrop-filter: blur(0);
-        box-shadow: none;
-        transition:
-          max-width 320ms ease,
-          padding 280ms ease,
-          background-color 280ms ease,
-          border-color 280ms ease,
-          box-shadow 280ms ease,
-          backdrop-filter 280ms ease;
-      }
-
-      /* Nav — au scroll : pill flottante + fixe */
-      .site-header.is-scrolled .site-nav {
-        max-width: 52rem;
-        padding: 0.55rem 0.65rem 0.55rem 1.1rem;
-        border-color: rgba(255, 255, 255, 0.1);
-        background: rgba(10, 10, 10, 0.72);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        box-shadow:
-          0 0 0 1px rgba(22, 63, 107, 0.15),
-          0 16px 40px -20px rgba(0, 0, 0, 0.7);
-      }
-
-      .nav-links a {
-        color: rgba(255, 255, 255, 0.72);
-        transition: color 160ms ease;
-      }
-
-      .nav-links a:hover,
-      .nav-links a:focus-visible {
-        color: #fff;
-      }
-
-      .btn-primary {
+      .landing-see {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 2.5rem;
-        padding: 0 1.25rem;
-        border-radius: 9999px;
-        background: #f2f2f2;
-        color: #0a0a0a;
+        min-height: 2.4rem;
+        padding: 0 1.05rem;
+        border-radius: 0.5rem;
+        background: #ececec;
+        color: #111;
         font-size: 0.875rem;
-        font-weight: 600;
+        font-weight: 500;
+        box-shadow: 0 10px 24px -16px rgba(0, 0, 0, 0.8);
         transition: background-color 160ms ease, transform 160ms ease;
       }
 
-      .btn-primary:hover {
+      .landing-see:hover {
         background: #fff;
       }
 
-      .btn-ghost {
+      .landing-cv {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 2.5rem;
-        padding: 0 1.25rem;
-        border-radius: 9999px;
-        border: 1px solid rgba(255, 255, 255, 0.18);
+        min-height: 2.4rem;
+        padding: 0 1.05rem;
+        border-radius: 0.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.75);
         background: transparent;
         color: #fff;
         font-size: 0.875rem;
         font-weight: 500;
-        transition: border-color 160ms ease, background-color 160ms ease;
-      }
-
-      .btn-ghost:hover {
-        border-color: rgba(255, 255, 255, 0.35);
-        background: rgba(255, 255, 255, 0.04);
-      }
-
-      .hero-title {
-        font-size: clamp(2.25rem, 6vw, 3.75rem);
-        line-height: 1.08;
-        letter-spacing: -0.03em;
-        text-shadow: 0 0 40px rgba(22, 63, 107, 0.35);
-      }
-
-      .tool-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.85rem;
-        padding: 0.55rem 0.95rem;
-        border-radius: 9999px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background: rgba(255, 255, 255, 0.04);
-        backdrop-filter: blur(8px);
-      }
-
-      .burger-btn {
-        display: grid;
-        place-items: center;
-        width: 2.5rem;
-        height: 2.5rem;
-        border-radius: 9999px;
-        color: #fff;
         transition: background-color 160ms ease;
       }
 
-      .burger-btn:hover {
-        background: rgba(255, 255, 255, 0.06);
+      .landing-cv:hover {
+        background: rgba(255, 255, 255, 0.08);
       }
 
-      .burger-btn .icon-close {
-        display: none;
-      }
-
-      .burger-btn.is-open .icon-burger {
-        display: none;
-      }
-
-      .burger-btn.is-open .icon-close {
-        display: block;
-      }
-
-      @media (min-width: 768px) {
-        .burger-btn {
-          display: none;
-        }
-      }
-
-      /* Panneau mobile — plein écran */
-      .mobile-panel {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100dvh;
-        min-height: 100%;
-        z-index: 45;
+      .tool-rows {
         display: flex;
         flex-direction: column;
-        padding: 5.75rem 1.5rem 2rem;
-        background: #0a0a0a;
-        background-image:
-          radial-gradient(ellipse 55% 40% at 10% 0%, rgba(22, 63, 107, 0.45), transparent 55%),
-          radial-gradient(ellipse 50% 35% at 90% 0%, rgba(18, 43, 70, 0.4), transparent 55%);
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transform: translateY(-12px);
-        transition:
-          opacity 220ms ease,
-          visibility 220ms ease,
-          transform 220ms ease;
+        gap: 2.5rem;
+        margin-top: 2.5rem;
       }
 
-      .mobile-panel.is-open {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-        transform: translateY(0);
-      }
-
-      @media (min-width: 768px) {
-        .mobile-panel {
-          display: none !important;
-        }
-      }
-
-      .mobile-panel a {
-        transition: color 160ms ease, background-color 160ms ease;
-      }
-
-      body.menu-open {
-        overflow: hidden;
-      }
-
-      /* Cards compétences */
-      .skill-card {
-        position: relative;
+      .tool-group {
         display: flex;
         flex-direction: column;
-        min-height: 260px;
-        padding: 1.75rem 1.5rem 1.75rem;
-        border-radius: 1.25rem;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: #0a0a0a;
-        overflow: hidden;
-        isolation: isolate;
-        transition: border-color 280ms ease;
+        align-items: center;
+        gap: 1rem;
       }
 
-      /*
-        Hover : #0b0f16 UNIQUEMENT en haut (~28%),
-        le reste de la card reste noir — comme la ref.
-      */
-      .skill-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 28%;
-        background: linear-gradient(
-          180deg,
-          #0b0f16 0%,
-          #0b0f16 35%,
-          rgba(11, 15, 22, 0.55) 70%,
-          transparent 100%
-        );
-        opacity: 0;
-        transition: opacity 280ms ease;
-        pointer-events: none;
-        z-index: 0;
-      }
-
-      .skill-card:hover,
-      .skill-card:focus-within {
-        border-color: rgba(255, 255, 255, 0.12);
-      }
-
-      .skill-card:hover::before,
-      .skill-card:focus-within::before {
-        opacity: 1;
-      }
-
-      .skill-card .skill-icon {
-        color: rgba(255, 255, 255, 0.4);
-        transition: color 280ms ease;
-      }
-
-      .skill-card:hover .skill-icon,
-      .skill-card:focus-within .skill-icon {
-        color: #3d6fa3;
-      }
-
-      .skill-card .skill-extra {
-        max-height: 0;
-        opacity: 0;
-        overflow: hidden;
-        margin-top: 0;
-        transition:
-          max-height 320ms ease,
-          opacity 240ms ease,
-          margin-top 280ms ease;
-      }
-
-      .skill-card:hover .skill-extra,
-      .skill-card:focus-within .skill-extra {
-        max-height: 10rem;
-        opacity: 1;
-        margin-top: 1.25rem;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .skill-card .skill-extra {
-          max-height: none;
-          opacity: 1;
-          margin-top: 1.25rem;
-        }
-      }
-
-      /* Cards projets */
-      .project-card {
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        border-radius: 1.25rem;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: #0a0a0a;
-        transition: border-color 220ms ease, transform 220ms ease;
-      }
-
-      .project-card:hover {
-        border-color: rgba(255, 255, 255, 0.16);
-        transform: translateY(-2px);
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .project-card:hover {
-          transform: none;
-        }
-      }
-
-      .project-card__media {
-        position: relative;
-        aspect-ratio: 16 / 10;
-        overflow: hidden;
-        background: #0b0f16;
-      }
-
-      .project-card__placeholder {
-        display: grid;
-        place-items: center;
-        width: 100%;
-        height: 100%;
-        background:
-          radial-gradient(ellipse 70% 60% at 30% 20%, rgba(22, 63, 107, 0.45), transparent 65%),
-          radial-gradient(ellipse 50% 50% at 80% 80%, rgba(18, 43, 70, 0.4), transparent 60%),
-          #0b0f16;
-        color: rgba(255, 255, 255, 0.35);
-      }
-
-      .project-card__placeholder span {
+      .tool-group__title {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.42);
         font-size: 0.7rem;
         font-weight: 600;
-        letter-spacing: 0.14em;
+        letter-spacing: 0.16em;
+        line-height: 1.3;
         text-transform: uppercase;
       }
 
-      .project-card__badge {
-        position: absolute;
-        top: 0.85rem;
-        left: 0.85rem;
-        z-index: 1;
-        border-radius: 9999px;
-        background: rgba(11, 15, 22, 0.85);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        padding: 0.3rem 0.7rem;
-        font-size: 0.65rem;
-        font-weight: 600;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: #9ec0e0;
-      }
-
-      .project-card.is-hidden {
-        display: none;
-      }
-
-      .project-filter {
-        display: inline-flex;
+      .tool-row {
+        display: flex;
+        flex-wrap: wrap;
         align-items: center;
-        border-radius: 9999px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background: transparent;
-        padding: 0.4rem 0.95rem;
-        font-size: 0.8rem;
-        font-weight: 500;
-        color: rgba(255, 255, 255, 0.55);
-        transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease;
+        justify-content: center;
+        gap: 0.7rem 0.8rem;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        list-style: none;
       }
 
-      .project-filter:hover {
-        color: rgba(255, 255, 255, 0.9);
-        border-color: rgba(255, 255, 255, 0.2);
+      .tool {
+        position: relative;
+        display: grid;
+        place-items: center;
       }
 
-      .project-filter.is-active {
-        color: #fff;
-        border-color: rgba(158, 192, 224, 0.45);
-        background: rgba(22, 63, 107, 0.35);
+      .tool:hover,
+      .tool:focus-within {
+        z-index: 2;
       }
 
-      .project-empty {
-        display: none;
-        grid-column: 1 / -1;
-        padding: 2.5rem 1rem;
-        text-align: center;
-        font-size: 0.875rem;
-        color: rgba(255, 255, 255, 0.45);
+      .tool-mark {
+        display: grid;
+        place-items: center;
+        width: auto;
+        min-width: 2.55rem;
+        height: 2.55rem;
+        border-radius: 0.85rem;
+        outline: none;
       }
 
-      .project-empty.is-visible {
+      .tool-mark svg {
         display: block;
+        width: auto;
+        height: 2.1rem;
+        max-width: 3.15rem;
       }
+
+      @media (min-width: 640px) {
+        .tool-rows {
+          gap: 3rem;
+          margin-top: 3.25rem;
+        }
+
+        .tool-group__title {
+          font-size: 0.75rem;
+        }
+
+        .tool-row {
+          gap: 1.35rem 1.75rem;
+          max-width: 40rem;
+        }
+
+        .tool-mark {
+          min-width: 3.35rem;
+          height: 3.35rem;
+        }
+
+        .tool-mark svg {
+          height: 2.75rem;
+          max-width: 4.8rem;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .tool-row {
+          flex-wrap: nowrap;
+          max-width: none;
+          gap: 2.15rem;
+        }
+      }
+
+      .tool-mark:focus-visible {
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.45);
+      }
+
+      .tool-name {
+        position: absolute;
+        bottom: calc(100% + 0.45rem);
+        left: 50%;
+        z-index: 3;
+        padding: 0.28rem 0.6rem;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 999px;
+        background: #161616;
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 550;
+        line-height: 1.2;
+        white-space: nowrap;
+        pointer-events: none;
+        opacity: 0;
+        transform: translateX(-50%) translateY(0.25rem);
+        transition: opacity 160ms ease, transform 160ms ease;
+      }
+
+      .tool:hover .tool-name,
+      .tool:focus-within .tool-name {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
     </style>
   </head>
 
-  <body class="min-h-dvh font-sans text-white antialiased">
+  <body class="landing min-h-dvh font-sans text-white antialiased">
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-white focus:px-4 focus:py-2 focus:text-void"
@@ -489,108 +231,71 @@
       Aller au contenu
     </a>
 
-    <!-- HEADER : normal → pill au scroll (fixe) -->
-    <header id="site-header" class="site-header">
-      <nav class="site-nav" aria-label="Navigation principale">
-        <!-- Logo -->
-        <a href="#home" class="flex shrink-0 items-center gap-2.5 pl-2 sm:pl-3">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path
-              d="m7 8 4 4-4 4"
-              stroke="currentColor"
-              stroke-width="2.4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path d="M13 16h4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
-          </svg>
-          <span class="text-[0.95rem] font-semibold tracking-tight">Egmon</span>
-        </a>
+    <header id="site-header" class="landing-header">
+      <nav class="landing-nav mx-auto flex h-[4.25rem] max-w-6xl items-center px-5 sm:px-8" aria-label="Navigation principale">
+        <a href="./index.html" class="text-[1.35rem] font-medium tracking-tight" aria-current="page">Egmon</a>
 
-        <!-- Links (desktop) -->
-        <div class="nav-links hidden items-center gap-7 text-sm font-medium md:flex">
-          <a href="#home">Home</a>
-          <a href="#skills">Skills</a>
-          <a href="#projet">Projet</a>
-          <a href="#parcours">Parcours</a>
+        <div class="landing-links ml-10 hidden items-center gap-10 text-sm font-medium md:flex lg:ml-16 lg:gap-14">
+          <a href="./projets.html">Projets</a>
+          <a href="./parcours.html">Parcours</a>
         </div>
 
-        <!-- Actions (desktop) -->
-        <div class="hidden shrink-0 items-center gap-2 sm:gap-3 md:flex">
-          <a
-            href="https://www.linkedin.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="grid h-9 w-9 place-items-center rounded-full text-white/70 transition hover:bg-white/5 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
-            aria-label="LinkedIn"
-            title="LinkedIn — ajoute ton lien"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M6.94 8.5H4.25V19h2.69V8.5ZM5.6 7.3a1.56 1.56 0 1 0 0-3.12 1.56 1.56 0 0 0 0 3.12ZM19.75 19h-2.69v-5.2c0-1.24-.02-2.83-1.72-2.83-1.73 0-2 1.35-2 2.74V19H10.66V8.5h2.58v1.43h.04c.36-.68 1.24-1.4 2.55-1.4 2.73 0 3.23 1.8 3.23 4.13V19Z" />
+        <div class="ml-auto flex items-center gap-2">
+          <a href="./contact.html" class="landing-connect hidden sm:inline-flex">
+            Contactez-moi
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </a>
-          <a
-            href="https://wa.me/243895467658"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="grid h-9 w-9 place-items-center rounded-full text-white/70 transition hover:bg-white/5 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
-            aria-label="WhatsApp"
-          >
-            <img src="./images/icon/whatsapp.png" alt="" class="h-4 w-4 object-contain brightness-0 invert" />
-          </a>
-          <a
-            href="https://www.instagram.com/prospere_egmon/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="grid h-9 w-9 place-items-center rounded-full text-white/70 transition hover:bg-white/5 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
-            aria-label="Instagram — prospere_egmon"
-          >
-            <img src="./images/icon/instagram.png" alt="" class="h-4 w-4 object-contain brightness-0 invert" />
-          </a>
 
-          <a href="#contact" class="btn-primary">Contactez-moi</a>
+          <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false">
+            <svg class="theme-toggle__sun" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" />
+              <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+            <svg class="theme-toggle__moon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M20 14.5A7.5 7.5 0 0 1 9.5 4 7.2 7.2 0 1 0 20 14.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            id="burger-btn"
+            class="burger-btn"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false"
+            aria-controls="mobile-panel"
+          >
+            <svg class="icon-burger" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+            <svg class="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+          </button>
         </div>
-
-        <!-- Burger (mobile) -->
-        <button
-          type="button"
-          id="burger-btn"
-          class="burger-btn"
-          aria-label="Ouvrir le menu"
-          aria-expanded="false"
-          aria-controls="mobile-panel"
-        >
-          <svg class="icon-burger" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-          </svg>
-          <svg class="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-          </svg>
-        </button>
       </nav>
     </header>
 
-    <!-- Menu mobile plein écran -->
     <div id="mobile-panel" class="mobile-panel" aria-hidden="true">
       <nav class="flex h-full min-h-0 w-full flex-1 flex-col" aria-label="Navigation mobile">
         <div class="flex flex-col gap-1 text-xl font-medium">
-          <a href="#home" class="mobile-link rounded-xl px-4 py-4 text-white/90 hover:bg-white/5 hover:text-white">Home</a>
-          <a href="#skills" class="mobile-link rounded-xl px-4 py-4 text-white/90 hover:bg-white/5 hover:text-white">Skills</a>
-          <a href="#projet" class="mobile-link rounded-xl px-4 py-4 text-white/90 hover:bg-white/5 hover:text-white">Projet</a>
-          <a href="#parcours" class="mobile-link rounded-xl px-4 py-4 text-white/90 hover:bg-white/5 hover:text-white">Parcours</a>
+          <a href="./index.html" class="mobile-link is-active rounded-xl px-4 py-4 text-white/90 hover:bg-white/5 hover:text-white" aria-current="page">Home</a>
+          <a href="./projets.html" class="mobile-link rounded-xl px-4 py-4 text-white/90 hover:bg-white/5 hover:text-white">Projets</a>
+          <a href="./parcours.html" class="mobile-link rounded-xl px-4 py-4 text-white/90 hover:bg-white/5 hover:text-white">Parcours</a>
         </div>
 
         <div class="mt-auto space-y-5 border-t border-white/10 pt-6">
-          <a href="#contact" class="btn-primary mobile-link w-full min-h-12">Contactez-moi</a>
+          <a href="./contact.html" class="btn-primary mobile-link w-full min-h-12">Contactez-moi</a>
 
           <div class="flex items-center justify-center gap-3">
             <a
-              href="https://www.linkedin.com/"
+              href="https://www.linkedin.com/in/prospere-engeba-04991924a"
               target="_blank"
               rel="noopener noreferrer"
               class="grid h-11 w-11 place-items-center rounded-full border border-white/12 bg-white/[0.04] text-white/80"
-              aria-label="LinkedIn"
-              title="LinkedIn — ajoute ton lien"
+              aria-label="LinkedIn — Prospere Engeba"
+              title="LinkedIn — Prospere Engeba"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M6.94 8.5H4.25V19h2.69V8.5ZM5.6 7.3a1.56 1.56 0 1 0 0-3.12 1.56 1.56 0 0 0 0 3.12ZM19.75 19h-2.69v-5.2c0-1.24-.02-2.83-1.72-2.83-1.73 0-2 1.35-2 2.74V19H10.66V8.5h2.58v1.43h.04c.36-.68 1.24-1.4 2.55-1.4 2.73 0 3.23 1.8 3.23 4.13V19Z" />
@@ -601,27 +306,27 @@
               target="_blank"
               rel="noopener noreferrer"
               class="grid h-11 w-11 place-items-center rounded-full border border-white/12 bg-white/[0.04]"
-              aria-label="WhatsApp"
+              aria-label="WhatsApp — 0895 467 658"
             >
-              <img src="./images/icon/whatsapp.png" alt="" class="h-5 w-5 object-contain brightness-0 invert" />
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-5 w-5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
             </a>
             <a
               href="https://www.instagram.com/prospere_egmon/"
               target="_blank"
               rel="noopener noreferrer"
               class="grid h-11 w-11 place-items-center rounded-full border border-white/12 bg-white/[0.04]"
-              aria-label="Instagram — prospere_egmon"
+              aria-label="Instagram — prospere egmon"
             >
-              <img src="./images/icon/instagram.png" alt="" class="h-5 w-5 object-contain brightness-0 invert" />
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-5 w-5"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.26.07 1.64.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07ZM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63A5.9 5.9 0 0 0 2.01 2.01 5.9 5.9 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91a5.9 5.9 0 0 0 1.38 2.13 5.9 5.9 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63C19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0Zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z"/></svg>
             </a>
             <a
               href="https://www.facebook.com/prospere.egmon"
               target="_blank"
               rel="noopener noreferrer"
               class="grid h-11 w-11 place-items-center rounded-full border border-white/12 bg-white/[0.04]"
-              aria-label="Facebook — Prospere Egmon"
+              aria-label="Facebook — prospere egmon"
             >
-              <img src="./images/icon/facebook.png" alt="" class="h-5 w-5 object-contain brightness-0 invert" />
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-5 w-5"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073Z"/></svg>
             </a>
           </div>
 
@@ -631,653 +336,257 @@
     </div>
 
     <main id="main">
-      <!-- HERO -->
-      <section
-        id="home"
-        class="relative flex min-h-dvh flex-col items-center justify-center px-5 pb-16 pt-28 text-center sm:px-8 md:justify-start md:pt-36 lg:pt-40"
-      >
-        <h1 class="hero-title mx-auto max-w-3xl font-extrabold text-white md:mt-2">
-          Prospere Engeba<br class="hidden sm:block" />
-          Développeur web
-        </h1>
-
-        <p class="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-          Je conçois des applications web modernes, performantes et adaptées aux besoins réels — formation en ingénierie logicielle.
-        </p>
-
-        <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
-          <a href="#contact" class="btn-primary min-h-11 px-6">Contactez-moi</a>
-          <a href="#projet" class="btn-ghost min-h-11 px-6">Voir projets</a>
+      <section class="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden px-5 pb-16 pt-24 text-center sm:px-8">
+        <div class="hero-light" aria-hidden="true">
+          <div class="hero-light__slot">
+            <div class="hero-light__bar"></div>
+          </div>
         </div>
 
-        <div class="mt-8 flex items-center justify-center gap-3">
-          <a
-            href="https://www.linkedin.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="grid h-11 w-11 place-items-center rounded-full border border-transparent text-white/80 transition hover:border-white/30 hover:bg-white/[0.06] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
-            aria-label="LinkedIn"
-            title="LinkedIn — ajoute ton lien"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M6.94 8.5H4.25V19h2.69V8.5ZM5.6 7.3a1.56 1.56 0 1 0 0-3.12 1.56 1.56 0 0 0 0 3.12ZM19.75 19h-2.69v-5.2c0-1.24-.02-2.83-1.72-2.83-1.73 0-2 1.35-2 2.74V19H10.66V8.5h2.58v1.43h.04c.36-.68 1.24-1.4 2.55-1.4 2.73 0 3.23 1.8 3.23 4.13V19Z" />
-            </svg>
-          </a>
-          <a
-            href="https://wa.me/243895467658"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="grid h-11 w-11 place-items-center rounded-full border border-transparent transition hover:border-white/30 hover:bg-white/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
-            aria-label="WhatsApp"
-          >
-            <img src="./images/icon/whatsapp.png" alt="" class="h-5 w-5 object-contain brightness-0 invert" />
-          </a>
-          <a
-            href="https://www.instagram.com/prospere_egmon/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="grid h-11 w-11 place-items-center rounded-full border border-transparent transition hover:border-white/30 hover:bg-white/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
-            aria-label="Instagram — prospere_egmon"
-          >
-            <img src="./images/icon/instagram.png" alt="" class="h-5 w-5 object-contain brightness-0 invert" />
-          </a>
-          <a
-            href="https://www.facebook.com/prospere.egmon"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="grid h-11 w-11 place-items-center rounded-full border border-transparent transition hover:border-white/30 hover:bg-white/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
-            aria-label="Facebook — Prospere Egmon"
-          >
-            <img src="./images/icon/facebook.png" alt="" class="h-5 w-5 object-contain brightness-0 invert" />
-          </a>
-        </div>
-
-        <p class="absolute bottom-6 left-0 right-0 text-center text-xs text-white/35">
-          Designed by <span class="underline decoration-white/30 underline-offset-2">Prospere Engeba</span>
-        </p>
-      </section>
-
-      <!-- Compétences et outils -->
-      <section id="skills" class="border-t border-white/5 px-5 py-20 sm:px-8 sm:py-24">
-        <div class="mx-auto max-w-6xl">
-          <h2 class="reveal text-center text-xl font-semibold tracking-tight text-white sm:text-2xl">
-            Compétences et outils
-          </h2>
-          <p class="mx-auto mt-3 max-w-lg text-center text-sm text-white/50">
-            Ce que j’utilise au quotidien pour construire des applications web.
+        <div class="relative z-10 mx-auto flex max-w-4xl flex-col items-center">
+          <p class="rounded-full border border-white/15 bg-white/[0.03] px-3 py-1 text-sm text-white/80">
+            Kinshasa, RDC
           </p>
 
-          <div class="mt-12 grid gap-4 md:grid-cols-3 md:gap-5">
-            <!-- 01 Frontend & Design -->
-            <article class="skill-card reveal" style="--reveal-delay: 60ms" tabindex="0">
-              <div class="relative z-10 flex items-start justify-between">
-                <span class="text-4xl font-semibold tracking-tight text-white/25 sm:text-5xl">01</span>
-                <span class="skill-icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                    <path d="M13 3 4 14h7l-1 7 9-11h-7l1-7Z" stroke-linejoin="round" />
-                  </svg>
-                </span>
-              </div>
-              <div class="relative z-10 mt-auto pt-16">
-                <h3 class="text-xl font-semibold tracking-tight text-white sm:text-2xl">
-                  Frontend &amp; Design
-                </h3>
-                <div class="skill-extra">
-                  <div class="mb-3 h-px w-full bg-white/15"></div>
-                  <p class="text-sm leading-relaxed text-white/65">
-                    HTML, CSS, Tailwind
-                    <br />
-                    Figma, Canva Design
-                  </p>
-                </div>
-              </div>
-            </article>
+          <h1 class="landing-title mx-auto mt-6 max-w-4xl text-balance">
+            Prospere Engeba,<br />
+            développeur web
+          </h1>
 
-            <!-- 02 Backend & Data -->
-            <article class="skill-card reveal" style="--reveal-delay: 140ms" tabindex="0">
-              <div class="relative z-10 flex items-start justify-between">
-                <span class="text-4xl font-semibold tracking-tight text-white/25 sm:text-5xl">02</span>
-                <span class="skill-icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                    <path d="M12 3 4 7.5v9L12 21l8-4.5v-9L12 3Z" stroke-linejoin="round" />
-                    <path d="M12 12 4 7.5M12 12l8-4.5M12 12v9" stroke-linejoin="round" />
-                  </svg>
-                </span>
-              </div>
-              <div class="relative z-10 mt-auto pt-16">
-                <h3 class="text-xl font-semibold tracking-tight text-white sm:text-2xl">
-                  Backend &amp; Data
-                </h3>
-                <div class="skill-extra">
-                  <div class="mb-3 h-px w-full bg-white/15"></div>
-                  <p class="text-sm leading-relaxed text-white/65">
-                    Django, Adonis JS/TypeScript
-                    <br />
-                    MySQL, PostgreSQL
-                  </p>
-                </div>
-              </div>
-            </article>
+          <p class="mx-auto mt-5 max-w-2xl text-balance text-base leading-relaxed text-white/55 sm:text-lg">
+            Je conçois des applications web modernes, performantes et adaptées aux besoins réels — formation en ingénierie logicielle.
+          </p>
 
-            <!-- 03 Outils & Système -->
-            <article class="skill-card reveal" style="--reveal-delay: 220ms" tabindex="0">
-              <div class="relative z-10 flex items-start justify-between">
-                <span class="text-4xl font-semibold tracking-tight text-white/25 sm:text-5xl">03</span>
-                <span class="skill-icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                </span>
-              </div>
-              <div class="relative z-10 mt-auto pt-16">
-                <h3 class="text-xl font-semibold tracking-tight text-white sm:text-2xl">
-                  Outils &amp; Système
-                </h3>
-                <div class="skill-extra">
-                  <div class="mb-3 h-px w-full bg-white/15"></div>
-                  <p class="text-sm leading-relaxed text-white/65">
-                    Docker, Git / GitHub, Vagrant
-                    <br />
-                    Arduino, maintenance &amp; support
-                    <br />
-                    IA générative
-                  </p>
-                </div>
-              </div>
-            </article>
+          <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <a href="./projets.html" class="landing-see">Voir projets</a>
+            <a href="./docs/CV_Prospere_Engeba.pdf" class="landing-cv" target="_blank" rel="noopener noreferrer">Voir CV</a>
           </div>
+
+          <nav class="social-row social-row--plain" aria-label="Réseaux">
+            <a href="https://wa.me/243895467658" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp — 0895 467 658">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              <span class="social-row__name">Prospere Egmon</span>
+            </a>
+            <a href="https://www.facebook.com/prospere.egmon" target="_blank" rel="noopener noreferrer" aria-label="Facebook — prospere egmon">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073Z"/></svg>
+              <span class="social-row__name">prospere egmon</span>
+            </a>
+            <a href="https://www.instagram.com/prospere_egmon/" target="_blank" rel="noopener noreferrer" aria-label="Instagram — prospere egmon">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.26.07 1.64.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07ZM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63A5.9 5.9 0 0 0 2.01 2.01 5.9 5.9 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91a5.9 5.9 0 0 0 1.38 2.13 5.9 5.9 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63C19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0Zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z"/></svg>
+              <span class="social-row__name">prospere egmon</span>
+            </a>
+            <a href="https://www.linkedin.com/in/prospere-engeba-04991924a" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — Prospere Engeba">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.94 8.5H4.25V19h2.69V8.5ZM5.6 7.3a1.56 1.56 0 1 0 0-3.12 1.56 1.56 0 0 0 0 3.12ZM19.75 19h-2.69v-5.2c0-1.24-.02-2.83-1.72-2.83-1.73 0-2 1.35-2 2.74V19H10.66V8.5h2.58v1.43h.04c.36-.68 1.24-1.4 2.55-1.4 2.73 0 3.23 1.8 3.23 4.13V19Z" /></svg>
+              <span class="social-row__name">Prospere Engeba</span>
+            </a>
+          </nav>
         </div>
       </section>
 
-      <!-- Projets -->
-      <section id="projet" class="border-t border-white/5 px-5 py-20 sm:px-8 sm:py-24">
-        <div class="mx-auto max-w-6xl">
-          <h2 class="reveal text-center text-xl font-semibold tracking-tight text-white sm:text-2xl">Projets</h2>
-          <p class="mx-auto mt-3 max-w-lg text-center text-sm text-white/50">
-            Quelques réalisations — filtre par stack pour explorer.
-          </p>
+      <section class="overflow-x-clip px-5 py-16 text-center sm:px-8 sm:py-28 lg:py-36" aria-labelledby="outils-title">
+        <h2 id="outils-title" class="text-xl font-semibold tracking-tight text-white sm:text-2xl">Mes outils</h2>
 
-          <div
-            id="project-filters"
-            class="mt-8 flex flex-wrap items-center justify-center gap-2"
-            role="group"
-            aria-label="Filtrer les projets"
-          >
-            <button type="button" class="project-filter is-active" data-filter="all" aria-pressed="true">Tous</button>
-            <button type="button" class="project-filter" data-filter="django" aria-pressed="false">Django</button>
-            <button type="button" class="project-filter" data-filter="adonis" aria-pressed="false">AdonisJS</button>
-            <button type="button" class="project-filter" data-filter="react" aria-pressed="false">React</button>
-            <button type="button" class="project-filter" data-filter="autres" aria-pressed="false">Autres</button>
+        <div class="tool-rows">
+          <div class="tool-group">
+            <h3 class="tool-group__title">Frontend &amp; Design</h3>
+            <ul class="tool-row">
+            <li class="tool">
+              <span class="tool-mark" tabindex="0" aria-label="HTML">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#E44D26" d="M19.037 113.876L9.032 1.661h109.936l-10.016 112.198-45.019 12.48z"/><path fill="#F16529" d="M64 116.8l36.378-10.086 8.559-95.878H64z"/><path fill="#EBEBEB" d="M64 52.455H45.788L44.53 38.361H64V24.599H29.489l.33 3.692 3.382 37.927H64zm0 35.743l-.061.017-15.327-4.14-.979-10.975H33.816l1.928 21.609 28.193 7.826.063-.017z"/><path fill="#fff" d="M63.952 52.455v13.763h16.947l-1.597 17.849-15.35 4.143v14.319l28.215-7.82.207-2.325 3.234-36.233.335-3.696h-3.708zm0-27.856v13.762h33.244l.276-3.092.628-6.978.329-3.692z"/></svg>
+                <span class="tool-name">HTML</span>
+              </span>
+            </li>
+            <li class="tool">
+              <span class="tool-mark" tabindex="0" aria-label="CSS">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#1572B6" d="M18.814 114.123L8.76 1.352h110.48l-10.064 112.754-45.243 12.543-45.119-12.526z"/><path fill="#33A9DC" d="M64.001 117.062l36.559-10.136 8.601-96.354h-45.16v106.49z"/><path fill="#fff" d="M64.001 51.429h18.302l1.264-14.163H64.001V23.435h34.682l-.332 3.711-3.4 38.114h-30.95V51.429z"/><path fill="#EBEBEB" d="M64.083 87.349l-.061.018-15.403-4.159-.985-11.031H33.752l1.937 21.717 28.331 7.863.063-.018v-14.39z"/><path fill="#fff" d="M81.127 64.675l-1.666 18.522-15.426 4.164v14.39l28.354-7.858.208-2.337 2.406-26.881H81.127z"/><path fill="#EBEBEB" d="M64.048 23.435v13.831H30.64l-.277-3.108-.63-7.012-.331-3.711h34.646zm-.047 27.996v13.831H48.792l-.277-3.108-.631-7.012-.33-3.711h16.447z"/></svg>
+                <span class="tool-name">CSS</span>
+              </span>
+            </li>
+            <li class="tool">
+              <span class="tool-mark" tabindex="0" aria-label="Tailwind">
+                <svg viewBox="0 0 32 32" aria-hidden="true">
+                  <path fill="#38bdf8" d="M16 7.2c-3.2 0-5.2 1.6-6.2 4.8 1.3-1.7 2.8-2.4 4.6-2 .9.2 1.6.9 2.3 1.6 1.2 1.2 2.5 2.6 5.5 2.6 3.2 0 5.2-1.6 6.2-4.8-1.3 1.7-2.8 2.4-4.6 2-.9-.2-1.6-.9-2.3-1.6-1.2-1.2-2.5-2.6-5.5-2.6Zm-6.2 9.6c-3.2 0-5.2 1.6-6.2 4.8 1.3-1.7 2.8-2.4 4.6-2 .9.2 1.6.9 2.3 1.6 1.2 1.2 2.5 2.6 5.5 2.6 3.2 0 5.2-1.6 6.2-4.8-1.3 1.7-2.8 2.4-4.6 2-.9-.2-1.6-.9-2.3-1.6-1.2-1.2-2.5-2.6-5.5-2.6Z" />
+                </svg>
+                <span class="tool-name">Tailwind</span>
+              </span>
+            </li>
+            <li class="tool">
+              <span class="tool-mark" tabindex="0" aria-label="Figma">
+                <svg aria-hidden="true" viewBox="0 0 256 384" xmlns="http://www.w3.org/2000/svg"><path d="M64,384 C99.328,384 128,355.328 128,320 L128,256 L64,256 C28.672,256 0,284.672 0,320 C0,355.328 28.672,384 64,384 Z" fill="#0ACF83"></path><path d="M0,192 C0,156.672 28.672,128 64,128 L128,128 L128,256 L64,256 C28.672,256 0,227.328 0,192 Z" fill="#A259FF"></path><path d="M0,64 C0,28.672 28.672,0 64,0 L128,0 L128,128 L64,128 C28.672,128 0,99.328 0,64 Z" fill="#F24E1E"></path><path d="M128,0 L192,0 C227.328,0 256,28.672 256,64 C256,99.328 227.328,128 192,128 L128,128 L128,0 Z" fill="#FF7262"></path><path d="M256,192 C256,227.328 227.328,256 192,256 C156.672,256 128,227.328 128,192 C128,156.672 156.672,128 192,128 C227.328,128 256,156.672 256,192 Z" fill="#1ABCFE"></path></svg>
+                <span class="tool-name">Figma</span>
+              </span>
+            </li>
+            <li class="tool">
+              <span class="tool-mark" tabindex="0" aria-label="Canva Design">
+                <svg aria-hidden="true" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="canva-g" x1="6" y1="2" x2="58" y2="62" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#2ad4d8"/><stop offset="0.48" stop-color="#3b6cff"/><stop offset="1" stop-color="#7a3ff0"/></linearGradient></defs><circle cx="32" cy="32" r="32" fill="url(#canva-g)"/><path d="M40.8 22.2A13.2 13.2 0 1 0 40.8 41.8" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/></svg>
+                <span class="tool-name">Canva Design</span>
+              </span>
+            </li>
+          </ul>
           </div>
 
-          <div id="project-grid" class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            <!-- Aide Scrabble -->
-            <article class="project-card reveal" style="--reveal-delay: 60ms" data-stack="django">
-              <div class="project-card__media" aria-hidden="true">
-                <div class="project-card__placeholder">
-                  <span>Aperçu bientôt</span>
-                </div>
-              </div>
-              <div class="flex flex-1 flex-col p-5">
-                <h3 class="text-lg font-semibold tracking-tight text-white">Aide Scrabble</h3>
-                <p class="mt-2 text-sm leading-relaxed text-white/55">
-                  Application web qui permet d’entrer vos lettres et d’obtenir les mots possibles, avec scores et
-                  jokers.
-                </p>
-                <div class="mt-auto flex flex-wrap gap-2 pt-4">
-                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">Django</span>
-                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">MySQL</span>
-                </div>
-              </div>
-            </article>
-
-            <!-- Génération des documents -->
-            <article class="project-card reveal" style="--reveal-delay: 140ms" data-stack="django">
-              <div class="project-card__media" aria-hidden="true">
-                <span class="project-card__badge">En développement</span>
-                <div class="project-card__placeholder">
-                  <span>Aperçu bientôt</span>
-                </div>
-              </div>
-              <div class="flex flex-1 flex-col p-5">
-                <h3 class="text-lg font-semibold tracking-tight text-white">Génération des documents</h3>
-                <p class="mt-2 text-sm leading-relaxed text-white/55">
-                  Génération en masse de supports personnalisés (invitations, badges, certificats…) à partir d’une
-                  maquette, de champs dynamiques et d’une liste de personnes.
-                </p>
-                <div class="mt-auto flex flex-wrap gap-2 pt-4">
-                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">Django</span>
-                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">PostgreSQL</span>
-                </div>
-              </div>
-            </article>
-
-            <!-- Gestionnaire de projet -->
-            <article class="project-card reveal" style="--reveal-delay: 220ms" data-stack="autres">
-              <div class="project-card__media" aria-hidden="true">
-                <div class="project-card__placeholder">
-                  <span>Aperçu bientôt</span>
-                </div>
-              </div>
-              <div class="flex flex-1 flex-col p-5">
-                <h3 class="text-lg font-semibold tracking-tight text-white">Gestionnaire de projet</h3>
-                <p class="mt-2 text-sm leading-relaxed text-white/55">
-                  App personnelle de planification des projets, idées et tâches.
-                </p>
-                <div class="mt-auto flex flex-wrap gap-2 pt-4">
-                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">HTML</span>
-                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">CSS</span>
-                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">JavaScript</span>
-                </div>
-              </div>
-            </article>
-
-            <!-- Raccourciseur d'URL -->
-            <article class="project-card reveal" style="--reveal-delay: 300ms" data-stack="adonis">
-              <div class="project-card__media" aria-hidden="true">
-                <div class="project-card__placeholder">
-                  <span>Aperçu bientôt</span>
-                </div>
-              </div>
-              <div class="flex flex-1 flex-col p-5">
-                <h3 class="text-lg font-semibold tracking-tight text-white">Raccourcisseur d’URL</h3>
-                <p class="mt-2 text-sm leading-relaxed text-white/55">
-                  Service pour raccourcir et partager des liens rapidement.
-                </p>
-                <div class="mt-auto flex flex-wrap gap-2 pt-4">
-                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">AdonisJS</span>
-                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">TypeScript</span>
-                  <span class="rounded-md border border-white/10 px-2.5 py-1 text-[0.7rem] font-medium text-white/60">PostgreSQL</span>
-                </div>
-              </div>
-            </article>
-
-            <p id="project-empty" class="project-empty" role="status">
-              Aucun projet pour ce filtre — d’autres arrivent bientôt.
-            </p>
+          <div class="tool-group">
+            <h3 class="tool-group__title">Backend &amp; Base de données</h3>
+            <ul class="tool-row">
+            <li class="tool">
+              <span class="tool-mark" tabindex="0" aria-label="Django">
+                <svg aria-hidden="true" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
+    <g>
+        <rect fill="#0C4B33" x="0" y="0" width="256" height="256" rx="28"></rect>
+        <path d="M186.377012,94.197636 L186.377012,160.424478 C186.377012,183.243286 184.707519,194.187745 179.699037,203.649406 C175.060358,212.741266 168.937684,218.490548 156.323731,224.798721 L129.794937,212.183571 C142.410087,206.247593 148.531564,201.05481 152.427049,193.074749 C156.509231,184.91278 157.808923,175.451119 157.808923,150.593015 L157.808923,94.197636 L186.377012,94.197636 Z M140.928486,50.0787207 L140.928486,182.316986 C126.272844,185.099476 115.512688,186.212472 103.826231,186.212472 C68.9487718,186.212472 50.7686431,170.445031 50.7686431,140.205054 C50.7686431,111.079269 70.0629644,92.1583404 99.9295492,92.1583404 C104.567032,92.1583404 108.091519,92.5281423 112.359199,93.6411381 L112.359199,50.0787207 L140.928486,50.0787207 Z M102.713236,115.160254 C88.243093,115.160254 79.8944275,124.065418 79.8944275,139.647359 C79.8944275,154.860696 87.8720944,163.208164 102.527736,163.208164 C105.680028,163.208164 108.278215,163.022665 112.359199,162.467364 L112.359199,116.643052 C109.020212,115.531253 106.237722,115.160254 102.713236,115.160254 Z M186.377012,50.2307105 L186.377012,79.5419941 L157.808923,79.5419941 L157.808923,50.2307105 L186.377012,50.2307105 Z" fill="#FFFFFD"></path>
+    </g>
+</svg>
+                <span class="tool-name">Django</span>
+              </span>
+            </li>
+            <li class="tool">
+              <span class="tool-mark" tabindex="0" aria-label="Adonis JS/TypeScript">
+                <svg aria-hidden="true" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 64c0 51.617 12.383 64 64 64 51.617 0 64-12.383 64-64 0-51.617-12.383-64-64-64C12.383 0 0 12.383 0 64zm25.808 13.295l20.075-45.621C49.27 23.984 55.788 19.813 64 19.813c8.212 0 14.729 4.17 18.118 11.86l20.074 45.622c.912 2.216 1.694 5.084 1.694 7.56 0 11.34-7.951 19.291-19.292 19.291-3.862 0-6.93-.985-10.035-1.983-3.182-1.022-6.403-2.057-10.559-2.057-4.108 0-7.408 1.044-10.653 2.071-3.138.993-6.225 1.969-9.941 1.969-11.34 0-19.292-7.95-19.292-19.29 0-2.477.783-5.345 1.695-7.561zM64 39.625l-19.813 44.84c5.866-2.738 12.644-4.041 19.813-4.041 6.909 0 13.947 1.303 19.552 4.04L64 39.626z" fill="#5A45FF"/></svg>
+                <span class="tool-name">Adonis JS/TypeScript</span>
+              </span>
+            </li>
+            <li class="tool">
+              <span class="tool-mark" tabindex="0" aria-label="MySQL">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#00618A" d="M117.688 98.242c-6.973-.191-12.297.461-16.852 2.379-1.293.547-3.355.559-3.566 2.18.711.746.82 1.859 1.387 2.777 1.086 1.754 2.922 4.113 4.559 5.352 1.789 1.348 3.633 2.793 5.551 3.961 3.414 2.082 7.223 3.27 10.504 5.352 1.938 1.23 3.859 2.777 5.75 4.164.934.684 1.563 1.75 2.773 2.18v-.195c-.637-.812-.801-1.93-1.387-2.777l-2.578-2.578c-2.52-3.344-5.719-6.281-9.117-8.719-2.711-1.949-8.781-4.578-9.91-7.73l-.199-.199c1.922-.219 4.172-.914 5.949-1.391 2.98-.797 5.645-.59 8.719-1.387l4.164-1.187v-.793c-1.555-1.594-2.664-3.707-4.359-5.152-4.441-3.781-9.285-7.555-14.273-10.703-2.766-1.746-6.184-2.883-9.117-4.363-.988-.496-2.719-.758-3.371-1.586-1.539-1.961-2.379-4.449-3.566-6.738-2.488-4.793-4.93-10.023-7.137-15.066-1.504-3.437-2.484-6.828-4.359-9.91-9-14.797-18.687-23.73-33.695-32.508-3.195-1.867-7.039-2.605-11.102-3.57l-6.543-.395c-1.332-.555-2.715-2.184-3.965-2.977C16.977 3.52 4.223-3.312.539 5.672-1.785 11.34 4.016 16.871 6.09 19.746c1.457 2.012 3.32 4.273 4.359 6.539.688 1.492.805 2.984 1.391 4.559 1.438 3.883 2.695 8.109 4.559 11.695.941 1.816 1.98 3.727 3.172 5.352.727.996 1.98 1.438 2.18 2.973-1.227 1.715-1.297 4.375-1.984 6.543-3.098 9.77-1.926 21.91 2.578 29.137 1.383 2.223 4.641 6.98 9.117 5.156 3.918-1.598 3.043-6.539 4.164-10.902.254-.988.098-1.715.594-2.379v.199l3.57 7.133c2.641 4.254 7.324 8.699 11.297 11.699 2.059 1.555 3.68 4.242 6.344 5.152v-.199h-.199c-.516-.805-1.324-1.137-1.98-1.781-1.551-1.523-3.277-3.414-4.559-5.156-3.613-4.902-6.805-10.27-9.711-15.855-1.391-2.668-2.598-5.609-3.77-8.324-.453-1.047-.445-2.633-1.387-3.172-1.281 1.988-3.172 3.598-4.164 5.945-1.582 3.754-1.789 8.336-2.375 13.082-.348.125-.195.039-.398.199-2.762-.668-3.73-3.508-4.758-5.949-2.594-6.164-3.078-16.09-.793-23.191.59-1.836 3.262-7.617 2.18-9.316-.516-1.691-2.219-2.672-3.172-3.965-1.18-1.598-2.355-3.703-3.172-5.551-2.125-4.805-3.113-10.203-5.352-15.062-1.07-2.324-2.875-4.676-4.359-6.738-1.645-2.289-3.484-3.977-4.758-6.742-.453-.984-1.066-2.559-.398-3.566.215-.684.516-.969 1.191-1.191 1.148-.887 4.352.297 5.547.793 3.18 1.32 5.832 2.578 8.527 4.363 1.289.855 2.598 2.512 4.16 2.973h1.785c2.789.641 5.914.195 8.523.988 4.609 1.402 8.738 3.582 12.488 5.949 11.422 7.215 20.766 17.48 27.156 29.734 1.027 1.973 1.473 3.852 2.379 5.945 1.824 4.219 4.125 8.559 5.941 12.688 1.816 4.113 3.582 8.27 6.148 11.695 1.348 1.801 6.551 2.766 8.918 3.766 1.66.699 4.379 1.43 5.949 2.379 3 1.809 5.906 3.965 8.723 5.945 1.402.992 5.73 3.168 5.945 4.957zm-88.605-75.52c-1.453-.027-2.48.156-3.566.395v.199h.195c.695 1.422 1.918 2.34 2.777 3.566l1.98 4.164.199-.195c1.227-.867 1.789-2.25 1.781-4.363-.492-.52-.562-1.164-.992-1.785-.562-.824-1.66-1.289-2.375-1.98zm0 0"/></svg>
+                <span class="tool-name">MySQL</span>
+              </span>
+            </li>
+            <li class="tool">
+              <span class="tool-mark" tabindex="0" aria-label="PostgreSQL">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path d="M93.809 92.112c.785-6.533.55-7.492 5.416-6.433l1.235.108c3.742.17 8.637-.602 11.513-1.938 6.191-2.873 9.861-7.668 3.758-6.409-13.924 2.873-14.881-1.842-14.881-1.842 14.703-21.815 20.849-49.508 15.543-56.287-14.47-18.489-39.517-9.746-39.936-9.52l-.134.025c-2.751-.571-5.83-.912-9.289-.968-6.301-.104-11.082 1.652-14.709 4.402 0 0-44.683-18.409-42.604 23.151.442 8.841 12.672 66.898 27.26 49.362 5.332-6.412 10.484-11.834 10.484-11.834 2.558 1.699 5.622 2.567 8.834 2.255l.249-.212c-.078.796-.044 1.575.099 2.497-3.757 4.199-2.653 4.936-10.166 6.482-7.602 1.566-3.136 4.355-.221 5.084 3.535.884 11.712 2.136 17.238-5.598l-.22.882c1.474 1.18 1.375 8.477 1.583 13.69.209 5.214.558 10.079 1.621 12.948 1.063 2.868 2.317 10.256 12.191 8.14 8.252-1.764 14.561-4.309 15.136-27.985"/><path d="M75.458 125.256c-4.367 0-7.211-1.689-8.938-3.32-2.607-2.46-3.641-5.629-4.259-7.522l-.267-.79c-1.244-3.358-1.666-8.193-1.916-14.419-.038-.935-.064-1.898-.093-2.919-.021-.747-.047-1.684-.085-2.664a18.8 18.8 0 01-4.962 1.568c-3.079.526-6.389.356-9.84-.507-2.435-.609-4.965-1.871-6.407-3.82-4.203 3.681-8.212 3.182-10.396 2.453-3.853-1.285-7.301-4.896-10.542-11.037-2.309-4.375-4.542-10.075-6.638-16.943-3.65-11.96-5.969-24.557-6.175-28.693C4.292 23.698 7.777 14.44 15.296 9.129 27.157.751 45.128 5.678 51.68 7.915c4.402-2.653 9.581-3.944 15.433-3.851 3.143.051 6.136.327 8.916.823 2.9-.912 8.628-2.221 15.185-2.139 12.081.144 22.092 4.852 28.949 13.615 4.894 6.252 2.474 19.381.597 26.651-2.642 10.226-7.271 21.102-12.957 30.57 1.544.011 3.781-.174 6.961-.831 6.274-1.295 8.109 2.069 8.607 3.575 1.995 6.042-6.677 10.608-9.382 11.864-3.466 1.609-9.117 2.589-13.745 2.377l-.202-.013-1.216-.107-.12 1.014-.116.991c-.311 11.999-2.025 19.598-5.552 24.619-3.697 5.264-8.835 6.739-13.361 7.709-1.544.33-2.947.474-4.219.474zm-9.19-43.671c2.819 2.256 3.066 6.501 3.287 14.434.028.99.054 1.927.089 2.802.106 2.65.355 8.855 1.327 11.477.137.371.26.747.39 1.146 1.083 3.316 1.626 4.979 6.309 3.978 3.931-.843 5.952-1.599 7.534-3.851 2.299-3.274 3.585-9.86 3.821-19.575l4.783.116-4.75-.57.14-1.186c.455-3.91.783-6.734 3.396-8.602 2.097-1.498 4.486-1.353 6.389-1.01-2.091-1.58-2.669-3.433-2.823-4.193l-.399-1.965 1.121-1.663c6.457-9.58 11.781-21.354 14.609-32.304 2.906-11.251 2.02-17.226 1.134-18.356-11.729-14.987-32.068-8.799-34.192-8.097l-.359.194-1.8.335-.922-.191c-2.542-.528-5.366-.82-8.393-.869-4.756-.08-8.593 1.044-11.739 3.431l-2.183 1.655-2.533-1.043c-5.412-2.213-21.308-6.662-29.696-.721-4.656 3.298-6.777 9.76-6.305 19.207.156 3.119 2.275 14.926 5.771 26.377 4.831 15.825 9.221 21.082 11.054 21.693.32.108 1.15-.537 1.976-1.529a270.708 270.708 0 0110.694-12.07l2.77-2.915 3.349 2.225c1.35.897 2.839 1.406 4.368 1.502l7.987-6.812-1.157 11.808c-.026.265-.039.626.065 1.296l.348 2.238-1.51 1.688-.174.196 4.388 2.025 1.836-2.301z"/><path fill="#336791" d="M115.731 77.44c-13.925 2.873-14.882-1.842-14.882-1.842 14.703-21.816 20.849-49.51 15.545-56.287C101.924.823 76.875 9.566 76.457 9.793l-.135.024c-2.751-.571-5.83-.911-9.291-.967-6.301-.103-11.08 1.652-14.707 4.402 0 0-44.684-18.408-42.606 23.151.442 8.842 12.672 66.899 27.26 49.363 5.332-6.412 10.483-11.834 10.483-11.834 2.559 1.699 5.622 2.567 8.833 2.255l.25-.212c-.078.796-.042 1.575.1 2.497-3.758 4.199-2.654 4.936-10.167 6.482-7.602 1.566-3.136 4.355-.22 5.084 3.534.884 11.712 2.136 17.237-5.598l-.221.882c1.473 1.18 2.507 7.672 2.334 13.557-.174 5.885-.29 9.926.871 13.082 1.16 3.156 2.316 10.256 12.192 8.14 8.252-1.768 12.528-6.351 13.124-13.995.422-5.435 1.377-4.631 1.438-9.49l.767-2.3c.884-7.367.14-9.743 5.225-8.638l1.235.108c3.742.17 8.639-.602 11.514-1.938 6.19-2.871 9.861-7.667 3.758-6.408z"/><path fill="#fff" d="M75.957 122.307c-8.232 0-10.84-6.519-11.907-9.185-1.562-3.907-1.899-19.069-1.551-31.503a1.59 1.59 0 011.64-1.55 1.594 1.594 0 011.55 1.639c-.401 14.341.168 27.337 1.324 30.229 1.804 4.509 4.54 8.453 12.275 6.796 7.343-1.575 10.093-4.359 11.318-11.46.94-5.449 2.799-20.951 3.028-24.01a1.593 1.593 0 011.71-1.472 1.597 1.597 0 011.472 1.71c-.239 3.185-2.089 18.657-3.065 24.315-1.446 8.387-5.185 12.191-13.794 14.037-1.463.313-2.792.453-4 .454zM31.321 90.466a6.71 6.71 0 01-2.116-.35c-5.347-1.784-10.44-10.492-15.138-25.885-3.576-11.717-5.842-23.947-6.041-27.922-.589-11.784 2.445-20.121 9.02-24.778 13.007-9.216 34.888-.44 35.813-.062a1.596 1.596 0 01-1.207 2.955c-.211-.086-21.193-8.492-32.768-.285-5.622 3.986-8.203 11.392-7.672 22.011.167 3.349 2.284 15.285 5.906 27.149 4.194 13.742 8.967 22.413 13.096 23.79.648.216 2.62.873 5.439-2.517A245.272 245.272 0 0145.88 73.046a1.596 1.596 0 012.304 2.208c-.048.05-4.847 5.067-10.077 11.359-2.477 2.979-4.851 3.853-6.786 3.853zm69.429-13.445a1.596 1.596 0 01-1.322-2.487c14.863-22.055 20.08-48.704 15.612-54.414-5.624-7.186-13.565-10.939-23.604-11.156-7.433-.16-13.341 1.738-14.307 2.069l-.243.099c-.971.305-1.716-.227-1.997-.849a1.6 1.6 0 01.631-2.025c.046-.027.192-.089.429-.176l-.021.006.021-.007c1.641-.601 7.639-2.4 15.068-2.315 11.108.118 20.284 4.401 26.534 12.388 2.957 3.779 2.964 12.485.019 23.887-3.002 11.625-8.651 24.118-15.497 34.277-.306.457-.81.703-1.323.703zm.76 10.21c-2.538 0-4.813-.358-6.175-1.174-1.4-.839-1.667-1.979-1.702-2.584-.382-6.71 3.32-7.878 5.208-8.411-.263-.398-.637-.866-1.024-1.349-1.101-1.376-2.609-3.26-3.771-6.078-.182-.44-.752-1.463-1.412-2.648-3.579-6.418-11.026-19.773-6.242-26.612 2.214-3.165 6.623-4.411 13.119-3.716C97.6 28.837 88.5 10.625 66.907 10.271c-6.494-.108-11.82 1.889-15.822 5.93-8.96 9.049-8.636 25.422-8.631 25.586a1.595 1.595 0 11-3.19.084c-.02-.727-.354-17.909 9.554-27.916C53.455 9.272 59.559 6.96 66.96 7.081c13.814.227 22.706 7.25 27.732 13.101 5.479 6.377 8.165 13.411 8.386 15.759.165 1.746-1.088 2.095-1.341 2.147l-.576.013c-6.375-1.021-10.465-.312-12.156 2.104-3.639 5.201 3.406 17.834 6.414 23.229.768 1.376 1.322 2.371 1.576 2.985.988 2.396 2.277 4.006 3.312 5.3.911 1.138 1.7 2.125 1.982 3.283.131.23 1.99 2.98 13.021.703 2.765-.57 4.423-.083 4.93 1.45.997 3.015-4.597 6.532-7.694 7.97-2.775 1.29-7.204 2.106-11.036 2.106zm-4.696-4.021c.35.353 2.101.962 5.727.806 3.224-.138 6.624-.839 8.664-1.786 2.609-1.212 4.351-2.567 5.253-3.492l-.5.092c-7.053 1.456-12.042 1.262-14.828-.577a6.162 6.162 0 01-.54-.401c-.302.119-.581.197-.78.253-1.58.443-3.214.902-2.996 5.105zm-45.562 8.915c-1.752 0-3.596-.239-5.479-.71-1.951-.488-5.24-1.957-5.19-4.37.057-2.707 3.994-3.519 5.476-3.824 5.354-1.103 5.703-1.545 7.376-3.67.488-.619 1.095-1.39 1.923-2.314 1.229-1.376 2.572-2.073 3.992-2.073.989 0 1.8.335 2.336.558 1.708.708 3.133 2.42 3.719 4.467.529 1.847.276 3.625-.71 5.006-3.237 4.533-7.886 6.93-13.443 6.93zm-7.222-4.943c.481.372 1.445.869 2.518 1.137 1.631.408 3.213.615 4.705.615 4.546 0 8.196-1.882 10.847-5.594.553-.774.387-1.757.239-2.274-.31-1.083-1.08-2.068-1.873-2.397-.43-.178-.787-.314-1.115-.314-.176 0-.712 0-1.614 1.009a41.146 41.146 0 00-1.794 2.162c-2.084 2.646-3.039 3.544-9.239 4.821-1.513.31-2.289.626-2.674.835zm12.269-7.36a1.596 1.596 0 01-1.575-1.354 8.218 8.218 0 01-.08-.799c-4.064-.076-7.985-1.82-10.962-4.926-3.764-3.927-5.477-9.368-4.699-14.927.845-6.037.529-11.366.359-14.229-.047-.796-.081-1.371-.079-1.769.003-.505.013-1.844 4.489-4.113 1.592-.807 4.784-2.215 8.271-2.576 5.777-.597 9.585 1.976 10.725 7.246 3.077 14.228.244 20.521-1.825 25.117-.385.856-.749 1.664-1.04 2.447l-.257.69c-1.093 2.931-2.038 5.463-1.748 7.354a1.595 1.595 0 01-1.335 1.819l-.244.02zM42.464 42.26l.062 1.139c.176 2.974.504 8.508-.384 14.86-.641 4.585.759 9.06 3.843 12.276 2.437 2.542 5.644 3.945 8.94 3.945h.068c.369-1.555.982-3.197 1.642-4.966l.255-.686c.329-.884.714-1.74 1.122-2.646 1.991-4.424 4.47-9.931 1.615-23.132-.565-2.615-1.936-4.128-4.189-4.627-4.628-1.022-11.525 2.459-12.974 3.837zm9.63-.677c-.08.564 1.033 2.07 2.485 2.271 1.449.203 2.689-.975 2.768-1.539.079-.564-1.033-1.186-2.485-1.388-1.451-.202-2.691.092-2.768.656zm2.818 2.826l-.407-.028c-.9-.125-1.81-.692-2.433-1.518-.219-.29-.576-.852-.505-1.354.101-.736.999-1.177 2.4-1.177.313 0 .639.023.967.069.766.106 1.477.327 2.002.62.91.508.977 1.075.936 1.368-.112.813-1.405 2.02-2.96 2.02zm-2.289-2.732c.045.348.907 1.496 2.029 1.651l.261.018c1.036 0 1.81-.815 1.901-1.082-.096-.182-.762-.634-2.025-.81a5.823 5.823 0 00-.821-.059c-.812 0-1.243.183-1.345.282zm43.605-1.245c.079.564-1.033 2.07-2.484 2.272-1.45.202-2.691-.975-2.771-1.539-.076-.564 1.036-1.187 2.486-1.388 1.45-.203 2.689.092 2.769.655zm-2.819 2.56c-1.396 0-2.601-1.086-2.7-1.791-.115-.846 1.278-1.489 2.712-1.688.316-.044.629-.066.93-.066 1.238 0 2.058.363 2.14.949.053.379-.238.964-.739 1.492-.331.347-1.026.948-1.973 1.079l-.37.025zm.943-3.013c-.276 0-.564.021-.856.061-1.441.201-2.301.779-2.259 1.089.048.341.968 1.332 2.173 1.332l.297-.021c.787-.109 1.378-.623 1.66-.919.443-.465.619-.903.598-1.052-.028-.198-.56-.49-1.613-.49zm3.965 32.843a1.594 1.594 0 01-1.324-2.483c3.398-5.075 2.776-10.25 2.175-15.255-.257-2.132-.521-4.337-.453-6.453.07-2.177.347-3.973.614-5.71.317-2.058.617-4.002.493-6.31a1.595 1.595 0 113.186-.172c.142 2.638-.197 4.838-.525 6.967-.253 1.643-.515 3.342-.578 5.327-.061 1.874.178 3.864.431 5.97.64 5.322 1.365 11.354-2.691 17.411a1.596 1.596 0 01-1.328.708z"/></svg>
+                <span class="tool-name">PostgreSQL</span>
+              </span>
+            </li>
+          </ul>
           </div>
 
-          <p class="mt-10 flex items-center justify-center gap-2 text-center text-sm text-white/45">
-            <span
-              class="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#9ec0e0]"
-              aria-hidden="true"
-            ></span>
-            D’autres projets sont en développement
-          </p>
-        </div>
-      </section>
-
-      <!-- Parcours -->
-      <section id="parcours" class="border-t border-white/5 px-5 py-20 sm:px-8 sm:py-24">
-        <div class="mx-auto max-w-3xl">
-          <h2 class="reveal text-center text-xl font-semibold tracking-tight text-white sm:text-2xl">Parcours</h2>
-
-          <!-- Formation -->
-          <div class="mt-14">
-            <h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-white/40">Formation</h3>
-
-            <div class="mt-6 space-y-8">
-              <article class="rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-6">
-                <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                  <h4 class="text-lg font-semibold text-white">KADEA Academy</h4>
-                  <span class="inline-flex w-fit items-center rounded-full border border-white/12 px-3 py-1 text-xs font-medium text-white/70">
-                    2026 — Présent
-                  </span>
-                </div>
-                <p class="mt-4 text-sm leading-relaxed text-white/55">
-                  Formation intensive en développement web : pratique, projets concrets, outils modernes et soft
-                  skills.
-                </p>
-                <ul class="mt-4 list-disc space-y-1.5 pl-5 text-sm text-white/55">
-                  <li>Frontend : HTML, CSS, JavaScript, Tailwind, Figma</li>
-                  <li>Backend : AdonisJS / TypeScript</li>
-                  <li>Bases de données : SQL</li>
-                  <li>Projets pratiques</li>
-                  <li>Soft skills : communication, travail en équipe, organisation</li>
-                </ul>
-              </article>
-
-              <article class="rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-6">
-                <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                  <h4 class="text-lg font-semibold text-white">Centre de formation OGI</h4>
-                  <span class="inline-flex w-fit items-center rounded-full border border-white/12 px-3 py-1 text-xs font-medium text-white/70">
-                    2022 · 3 mois
-                  </span>
-                </div>
-                <p class="mt-4 text-sm leading-relaxed text-white/55">
-                  Premiers pas en programmation et initiation au développement web avec PHP.
-                </p>
-              </article>
-            </div>
-          </div>
-
-          <!-- Stages -->
-          <div class="mt-14">
-            <h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-white/40">Stages</h3>
-
-            <div class="mt-6 space-y-8">
-              <article class="rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-6">
-                <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                  <div>
-                    <p class="text-xs font-medium text-white/45">Stage académique</p>
-                    <h4 class="mt-1 text-lg font-semibold text-white">Sénat, RDC</h4>
-                  </div>
-                  <span class="inline-flex w-fit items-center rounded-full border border-white/12 px-3 py-1 text-xs font-medium text-white/70">
-                    Mai 2025 · 1 mois
-                  </span>
-                </div>
-                <p class="mt-4 text-sm leading-relaxed text-white/55">
-                  Découverte de l’environnement professionnel en échangeant avec différents agents. Ces interactions
-                  m’ont permis de mieux comprendre le fonctionnement de l’institution, tout en recueillant des
-                  informations utiles pour mon mémoire de fin d’études.
-                </p>
-                <ul class="mt-4 list-disc space-y-1 pl-5 text-sm text-white/55">
-                  <li>Système d’enregistrement des agents (PHP &amp; MySQL)</li>
-                  <li>Notions en réseau informatique</li>
-                  <li>Travail collaboratif et mise en pratique académique</li>
-                </ul>
-              </article>
-
-              <article class="rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-6">
-                <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                  <div>
-                    <p class="text-xs font-medium text-white/45">Stage académique</p>
-                    <h4 class="mt-1 text-lg font-semibold text-white">REGIDESO, RDC</h4>
-                  </div>
-                  <span class="inline-flex w-fit items-center rounded-full border border-white/12 px-3 py-1 text-xs font-medium text-white/70">
-                    Mai 2024 · 1 mois
-                  </span>
-                </div>
-                <p class="mt-4 text-sm leading-relaxed text-white/55">
-                  Immersion dans une entreprise publique, participation aux activités quotidiennes et collaboration
-                  avec une équipe de stagiaires.
-                </p>
-                <ul class="mt-4 list-disc space-y-1 pl-5 text-sm text-white/55">
-                  <li>Mini-projet : gestion des équipements informatiques (PHP &amp; MySQL)</li>
-                  <li>Répartition des tâches et travaux pratiques</li>
-                </ul>
-              </article>
-            </div>
-          </div>
-
-          <!-- Éducation -->
-          <div class="mt-14">
-            <h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-white/40">Éducation</h3>
-
-            <ol class="mt-6 space-y-0">
-              <li class="grid gap-2 border-t border-white/10 py-5 sm:grid-cols-[8.5rem_1fr] sm:gap-8">
-                <p class="text-sm text-white/40">2021 — 2025</p>
-                <div>
-                  <p class="font-semibold text-white">UPC</p>
-                  <p class="mt-1 text-sm text-white/55">
-                    Licence en Sciences Informatiques — Ingénierie Logicielle (Bac+4)
-                  </p>
-                </div>
-              </li>
-              <li class="grid gap-2 border-t border-white/10 py-5 sm:grid-cols-[8.5rem_1fr] sm:gap-8">
-                <p class="text-sm text-white/40">2015 — 2021</p>
-                <div>
-                  <p class="font-semibold text-white">Collège Notre Dame Du Congo</p>
-                  <p class="mt-1 text-sm text-white/55">Diplôme d’État en Biologie-Chimie</p>
-                </div>
-              </li>
-              <li class="grid gap-2 border-t border-white/10 py-5 sm:grid-cols-[8.5rem_1fr] sm:gap-8">
-                <p class="text-sm text-white/40">2007 — 2015</p>
-                <div>
-                  <p class="font-semibold text-white">Complexe Scolaire LOLIKI</p>
-                  <p class="mt-1 text-sm text-white/55">École maternelle et primaire</p>
-                </div>
-              </li>
-            </ol>
-          </div>
-        </div>
-      </section>
-
-      <!-- Contact -->
-      <section id="contact" class="border-t border-white/5 px-5 py-20 sm:px-8 sm:py-24">
-        <div class="mx-auto max-w-5xl">
-          <h2 class="reveal text-center text-xl font-semibold tracking-tight text-white sm:text-2xl">Contact</h2>
-          <p class="mx-auto mt-3 max-w-lg text-center text-sm text-white/50">
-            Une question, une opportunité, ou un projet à discuter ? Écris-moi.
-          </p>
-
-          <div class="mt-12 grid items-start gap-6 lg:grid-cols-2">
-            <!-- Coordonnées -->
-            <div class="rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-7">
-              <h3 class="text-sm font-semibold text-white">Mes coordonnées</h3>
-              <div class="mt-5 space-y-3">
-                <div class="flex items-center justify-between gap-4 rounded-xl border border-white/8 bg-void px-4 py-3.5">
-                  <span class="text-xs font-medium text-white/45">Ville</span>
-                  <span class="text-sm font-medium text-white/90">Kinshasa, RDC</span>
-                </div>
-                <a
-                  href="https://wa.me/243895467658"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex items-center justify-between gap-4 rounded-xl border border-white/8 bg-void px-4 py-3.5 transition hover:border-white/16 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
-                >
-                  <span class="text-xs font-medium text-white/45">WhatsApp</span>
-                  <span class="text-sm font-semibold text-white">+243 895 467 658</span>
-                </a>
-                <a
-                  href="mailto:engebaprospere@gmail.com"
-                  class="flex items-center justify-between gap-4 rounded-xl border border-white/8 bg-void px-4 py-3.5 transition hover:border-white/16 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
-                >
-                  <span class="text-xs font-medium text-white/45">Email</span>
-                  <span class="text-sm font-medium text-white/90">engebaprospere@gmail.com</span>
-                </a>
-              </div>
-
-              <div class="mt-6 flex items-center gap-2">
-                <a
-                  href="https://www.linkedin.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="grid h-10 w-10 place-items-center rounded-full border border-white/12 text-white/70 transition hover:border-white/25 hover:bg-white/[0.04] hover:text-white"
-                  aria-label="LinkedIn"
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M6.94 8.5H4.25V19h2.69V8.5ZM5.6 7.3a1.56 1.56 0 1 0 0-3.12 1.56 1.56 0 0 0 0 3.12ZM19.75 19h-2.69v-5.2c0-1.24-.02-2.83-1.72-2.83-1.73 0-2 1.35-2 2.74V19H10.66V8.5h2.58v1.43h.04c.36-.68 1.24-1.4 2.55-1.4 2.73 0 3.23 1.8 3.23 4.13V19Z" />
-                  </svg>
-                </a>
-                <a
-                  href="https://wa.me/243895467658"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="grid h-10 w-10 place-items-center rounded-full border border-white/12 transition hover:border-white/25 hover:bg-white/[0.04]"
-                  aria-label="WhatsApp"
-                >
-                  <img src="./images/icon/whatsapp.png" alt="" class="h-4 w-4 object-contain brightness-0 invert" />
-                </a>
-                <a
-                  href="https://www.instagram.com/prospere_egmon/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="grid h-10 w-10 place-items-center rounded-full border border-white/12 transition hover:border-white/25 hover:bg-white/[0.04]"
-                  aria-label="Instagram — prospere_egmon"
-                >
-                  <img src="./images/icon/instagram.png" alt="" class="h-4 w-4 object-contain brightness-0 invert" />
-                </a>
-                <a
-                  href="https://www.facebook.com/prospere.egmon"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="grid h-10 w-10 place-items-center rounded-full border border-white/12 transition hover:border-white/25 hover:bg-white/[0.04]"
-                  aria-label="Facebook — Prospere Egmon"
-                >
-                  <img src="./images/icon/facebook.png" alt="" class="h-4 w-4 object-contain brightness-0 invert" />
-                </a>
-              </div>
-            </div>
-
-            <!-- Formulaire -->
-            <form class="rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-7" action="#" method="post">
-              <h3 class="text-sm font-semibold text-white">Laisse un message</h3>
-              <div class="mt-5 space-y-4">
-                <label class="block">
-                  <span class="text-xs font-medium text-white/50">Nom</span>
-                  <input
-                    type="text"
-                    name="name"
-                    autocomplete="name"
-                    class="mt-2 w-full rounded-xl border border-white/10 bg-void px-4 py-3 text-sm text-white outline-none transition placeholder:text-white/30 focus:border-white/25 focus:ring-2 focus:ring-glow/30"
-                    placeholder="Ton nom"
-                  />
-                </label>
-                <label class="block">
-                  <span class="text-xs font-medium text-white/50">Email</span>
-                  <input
-                    type="email"
-                    name="email"
-                    autocomplete="email"
-                    class="mt-2 w-full rounded-xl border border-white/10 bg-void px-4 py-3 text-sm text-white outline-none transition placeholder:text-white/30 focus:border-white/25 focus:ring-2 focus:ring-glow/30"
-                    placeholder="ton.email@exemple.com"
-                  />
-                </label>
-                <label class="block">
-                  <span class="text-xs font-medium text-white/50">Message</span>
-                  <textarea
-                    name="message"
-                    rows="5"
-                    class="mt-2 w-full resize-y rounded-xl border border-white/10 bg-void px-4 py-3 text-sm text-white outline-none transition placeholder:text-white/30 focus:border-white/25 focus:ring-2 focus:ring-glow/30"
-                    placeholder="Décris ton besoin…"
-                  ></textarea>
-                </label>
-                <button type="submit" class="btn-primary w-full min-h-12">Envoyer</button>
-              </div>
-            </form>
+          <div class="tool-group">
+            <h3 class="tool-group__title">Outils &amp; Système</h3>
+            <ul class="tool-row">
+            <li class="tool">
+              <span class="tool-mark" tabindex="0" aria-label="Docker">
+                <svg aria-hidden="true" viewBox="0 0 256 185" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
+    <g>
+        <path d="M250.715745,70.4971666 C244.951102,66.4973277 231.740464,64.997388 221.412146,66.9973071 C220.211179,56.9977092 214.68673,48.2480609 205.078993,40.4983724 L199.554544,36.4985331 L195.711449,42.248302 C190.90758,49.7480006 188.505646,60.2475786 189.226226,70.2471769 C189.46642,73.7470364 190.667387,79.9967847 194.270289,85.496564 C190.90758,87.4964838 183.941971,89.996383 174.814621,89.996383 L1.15476998,89.996383 L0.674383104,91.9963028 C-1.00697093,101.9959 -1.00697093,133.244645 18.6888904,157.243681 C33.5808831,175.492947 55.6786788,184.742575 84.7420842,184.742575 C147.672763,184.742575 194.270289,154.493791 216.127891,99.7459909 C224.774854,99.9959813 243.269748,99.7459909 252.637292,80.996745 C252.877486,80.4967649 253.357872,79.4968046 255.039227,75.7469554 L256,73.7470364 L250.715745,70.4971666 L250.715745,70.4971666 Z M139.986573,0 L113.565295,0 L113.565295,24.9989952 L139.986573,24.9989952 L139.986573,0 L139.986573,0 Z M139.986573,29.9987943 L113.565295,29.9987943 L113.565295,54.9977896 L139.986573,54.9977896 L139.986573,29.9987943 L139.986573,29.9987943 Z M108.761427,29.9987943 L82.3401495,29.9987943 L82.3401495,54.9977896 L108.761427,54.9977896 L108.761427,29.9987943 L108.761427,29.9987943 Z M77.5362814,29.9987943 L51.1150037,29.9987943 L51.1150037,54.9977896 L77.5362814,54.9977896 L77.5362814,29.9987943 L77.5362814,29.9987943 Z M46.311135,59.9975886 L19.8898576,59.9975886 L19.8898576,84.9965839 L46.311135,84.9965839 L46.311135,59.9975886 L46.311135,59.9975886 Z M77.5362814,59.9975886 L51.1150037,59.9975886 L51.1150037,84.9965839 L77.5362814,84.9965839 L77.5362814,59.9975886 L77.5362814,59.9975886 Z M108.761427,59.9975886 L82.3401495,59.9975886 L82.3401495,84.9965839 L108.761427,84.9965839 L108.761427,59.9975886 L108.761427,59.9975886 Z M139.986573,59.9975886 L113.565295,59.9975886 L113.565295,84.9965839 L139.986573,84.9965839 L139.986573,59.9975886 L139.986573,59.9975886 Z M171.211719,59.9975886 L144.790441,59.9975886 L144.790441,84.9965839 L171.211719,84.9965839 L171.211719,59.9975886 L171.211719,59.9975886 Z" fill="#2396ED" fill-rule="nonzero"></path>
+    </g>
+</svg>
+                <span class="tool-name">Docker</span>
+              </span>
+            </li>
+            <li class="tool">
+              <span class="tool-mark" tabindex="0" aria-label="Git / GitHub">
+                <svg viewBox="0 0 32 32" aria-hidden="true">
+                  <circle cx="16" cy="16" r="13" fill="#181717" />
+                  <path fill="#fff" d="M16 7.2a8.8 8.8 0 0 0-2.8 17.1c.4.1.6-.2.6-.4v-1.4c-2.4.5-2.9-1-2.9-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.2 1.9.9 2.3.7.1-.5.3-.9.5-1.1-1.9-.2-3.9-1-3.9-4.3 0-.9.3-1.7.9-2.3-.1-.2-.4-1.1.1-2.3 0 0 .7-.2 2.4.9a8.2 8.2 0 0 1 4.4 0c1.7-1.1 2.4-.9 2.4-.9.5 1.2.2 2.1.1 2.3.6.6.9 1.4.9 2.3 0 3.3-2 4.1-3.9 4.3.3.3.6.8.6 1.6v2.3c0 .2.2.5.6.4A8.8 8.8 0 0 0 16 7.2Z" />
+                </svg>
+                <span class="tool-name">Git / GitHub</span>
+              </span>
+            </li>
+            <li class="tool">
+              <span class="tool-mark" tabindex="0" aria-label="Vagrant">
+                <svg viewBox="0 0 32 32" aria-hidden="true">
+                  <path fill="#1563ff" d="M5.5 5.5h8.2L19 26.5h-6.6L5.5 5.5Z" />
+                  <path fill="#1d9bff" d="M15.2 5.5H26l-7.2 21H13l2.2-21Z" />
+                </svg>
+                <span class="tool-name">Vagrant</span>
+              </span>
+            </li>
+            <li class="tool">
+              <span class="tool-mark" tabindex="0" aria-label="Arduino">
+                <svg aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#00979D" fill-rule="evenodd" d="M18.087 6.146c-.3 0-.607.017-.907.069-2.532.367-4.23 2.239-5.18 3.674-.95-1.435-2.648-3.307-5.18-3.674a6.49 6.49 0 0 0-.907-.069C2.648 6.146 0 8.77 0 12s2.656 5.854 5.913 5.854c.3 0 .607-.017.916-.069 2.531-.376 4.23-2.247 5.18-3.683.949 1.436 2.647 3.307 5.18 3.683.299.043.607.069.915.069C21.344 17.854 24 15.23 24 12s-2.656-5.854-5.913-5.854zM6.53 15.734a3.837 3.837 0 0 1-.625.043c-2.148 0-3.889-1.7-3.889-3.777 0-2.085 1.749-3.777 3.898-3.777.208 0 .416.017.624.043 2.39.35 3.847 2.768 4.347 3.734-.508.974-1.974 3.384-4.355 3.734zm11.558.043c-.208 0-.416-.017-.624-.043-2.39-.35-3.856-2.768-4.347-3.734.491-.966 1.957-3.384 4.347-3.734.208-.026.416-.043.624-.043 2.149 0 3.89 1.7 3.89 3.777 0 2.085-1.75 3.777-3.89 3.777zm1.65-4.404v1.134h-1.205v1.182h-1.156v-1.182H16.17v-1.134h1.206V10.19h1.156v1.183h1.206zM4.246 12.498H7.82v-1.125H4.245v1.125z"/></svg>
+                <span class="tool-name">Arduino</span>
+              </span>
+            </li>
+            <li class="tool">
+              <span class="tool-mark" tabindex="0" aria-label="maintenance &amp; support">
+                <svg aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#f0b429" d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/><path fill="#c4841d" d="M5.1 16.2 3.7 17.6a2.12 2.12 0 0 0 3 3l1.4-1.4-3-3z"/></svg>
+                <span class="tool-name">maintenance &amp; support</span>
+              </span>
+            </li>
+            <li class="tool">
+              <span class="tool-mark" tabindex="0" aria-label="IA générative">
+                <svg aria-hidden="true" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ia-spark" x1="8" y1="4" x2="34" y2="42" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f5f3ff"/><stop offset="0.42" stop-color="#c4b5fd"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs><path fill="url(#ia-spark)" d="M22.2 3.2c.55 6.4 2.1 10.2 6.2 13.8 4.1 3.6 8.2 5 14.2 5.8-6 .8-10.1 2.2-14.2 5.8-4.1 3.6-5.65 7.4-6.2 13.8-.55-6.4-2.1-10.2-6.2-13.8C11.9 24.8 7.8 23.4 1.8 22.6c6-.8 10.1-2.2 14.2-5.8 4.1-3.6 5.65-7.4 6.2-13.6Z"/><path fill="#ddd6fe" d="M36.4 4.6c.22 2.3.85 3.6 2.3 4.9 1.5 1.3 2.9 1.9 5.1 2.2-2.2.3-3.6.9-5.1 2.2-1.45 1.3-2.08 2.6-2.3 4.9-.22-2.3-.85-3.6-2.3-4.9-1.5-1.3-2.9-1.9-5.1-2.2 2.2-.3 3.6-.9 5.1-2.2 1.45-1.3 2.08-2.6 2.3-4.9Z"/></svg>
+                <span class="tool-name">IA générative</span>
+              </span>
+            </li>
+          </ul>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="border-t border-white/5 px-5 py-10 text-center sm:px-8">
-      <p class="text-sm text-white/40">
-        2026 © Designed by <span class="font-semibold text-white/70">EGMON</span>
-      </p>
+    <footer class="landing-footer">
+      <div class="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-14">
+        <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div>
+            <a href="./index.html" class="text-xl font-medium tracking-tight">Egmon</a>
+            <p class="mt-3 max-w-xs text-sm leading-relaxed text-white/55">
+              Applications web modernes et performantes, pensées pour des besoins réels. Basé à Kinshasa.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-sm font-semibold">Liens</h2>
+            <div class="mt-3 flex flex-col gap-2 text-sm text-white/55">
+              <a class="w-fit transition hover:text-white" href="./projets.html">Projets</a>
+              <a class="w-fit transition hover:text-white" href="./parcours.html">Parcours</a>
+              <a class="w-fit transition hover:text-white" href="./contact.html">Contact</a>
+            </div>
+          </div>
+
+          <div>
+            <h2 class="text-sm font-semibold">Social</h2>
+            <div class="mt-3 flex gap-2">
+              <a
+                href="https://www.linkedin.com/in/prospere-engeba-04991924a"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="grid h-9 w-9 place-items-center rounded-md text-white/80 transition hover:bg-white/5 hover:text-white"
+                aria-label="LinkedIn — Prospere Engeba"
+                title="LinkedIn — Prospere Engeba"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M6.94 8.5H4.25V19h2.69V8.5ZM5.6 7.3a1.56 1.56 0 1 0 0-3.12 1.56 1.56 0 0 0 0 3.12ZM19.75 19h-2.69v-5.2c0-1.24-.02-2.83-1.72-2.83-1.73 0-2 1.35-2 2.74V19H10.66V8.5h2.58v1.43h.04c.36-.68 1.24-1.4 2.55-1.4 2.73 0 3.23 1.8 3.23 4.13V19Z" />
+                </svg>
+              </a>
+              <a
+                href="https://wa.me/243895467658"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="grid h-9 w-9 place-items-center rounded-md transition hover:bg-white/5"
+                aria-label="WhatsApp — 0895 467 658"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-4 w-4"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              </a>
+              <a
+                href="https://www.instagram.com/prospere_egmon/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="grid h-9 w-9 place-items-center rounded-md transition hover:bg-white/5"
+                aria-label="Instagram — prospere egmon"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-4 w-4"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.26.07 1.64.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07ZM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63A5.9 5.9 0 0 0 2.01 2.01 5.9 5.9 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91a5.9 5.9 0 0 0 1.38 2.13 5.9 5.9 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63C19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0Zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z"/></svg>
+              </a>
+              <a
+                href="https://www.facebook.com/prospere.egmon"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="grid h-9 w-9 place-items-center rounded-md transition hover:bg-white/5"
+                aria-label="Facebook — prospere egmon"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-4 w-4"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073Z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-white/45 sm:flex-row sm:items-center sm:justify-between">
+          <p>2026 © Designed by <span class="font-medium text-white/70">EGMON</span></p>
+          <p>Kinshasa, RDC</p>
+        </div>
+      </div>
     </footer>
 
-    <script>
-      (function () {
-        const header = document.getElementById('site-header');
-        const burger = document.getElementById('burger-btn');
-        const panel = document.getElementById('mobile-panel');
-        const threshold = 24;
-        let ticking = false;
-
-        function updateHeader() {
-          const scrolled = window.scrollY > threshold;
-          header.classList.toggle('is-scrolled', scrolled);
-          ticking = false;
-        }
-
-        window.addEventListener(
-          'scroll',
-          function () {
-            if (!ticking) {
-              window.requestAnimationFrame(updateHeader);
-              ticking = true;
-            }
-          },
-          { passive: true }
-        );
-
-        updateHeader();
-
-        function setMenuOpen(open) {
-          burger.classList.toggle('is-open', open);
-          panel.classList.toggle('is-open', open);
-          panel.setAttribute('aria-hidden', open ? 'false' : 'true');
-          burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-          burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
-          document.body.classList.toggle('menu-open', open);
-        }
-
-        burger.addEventListener('click', function () {
-          setMenuOpen(!panel.classList.contains('is-open'));
-        });
-
-        panel.querySelectorAll('.mobile-link').forEach(function (link) {
-          link.addEventListener('click', function () {
-            setMenuOpen(false);
-          });
-        });
-
-        document.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape' && panel.classList.contains('is-open')) {
-            setMenuOpen(false);
-            burger.focus();
-          }
-        });
-
-        window.addEventListener('resize', function () {
-          if (window.innerWidth >= 768 && panel.classList.contains('is-open')) {
-            setMenuOpen(false);
-          }
-        });
-
-        /* Filtre projets */
-        const filterBar = document.getElementById('project-filters');
-        const projectCards = document.querySelectorAll('#project-grid .project-card');
-        const projectEmpty = document.getElementById('project-empty');
-
-        if (filterBar) {
-          filterBar.addEventListener('click', function (e) {
-            const btn = e.target.closest('.project-filter');
-            if (!btn) return;
-
-            const filter = btn.getAttribute('data-filter');
-            filterBar.querySelectorAll('.project-filter').forEach(function (b) {
-              const active = b === btn;
-              b.classList.toggle('is-active', active);
-              b.setAttribute('aria-pressed', active ? 'true' : 'false');
-            });
-
-            let visible = 0;
-            projectCards.forEach(function (card) {
-              const stack = card.getAttribute('data-stack');
-              const show = filter === 'all' || stack === filter;
-              card.classList.toggle('is-hidden', !show);
-              if (show) {
-                card.classList.add('is-in');
-                visible += 1;
-              }
-            });
-
-            if (projectEmpty) {
-              projectEmpty.classList.toggle('is-visible', visible === 0);
-            }
-          });
-        }
-
-        /* Révélation légère au scroll */
-        const revealEls = document.querySelectorAll('.reveal');
-        const prefersReduced =
-          window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        if (prefersReduced || !('IntersectionObserver' in window)) {
-          revealEls.forEach(function (el) {
-            el.classList.add('is-in');
-          });
-        } else {
-          const revealObserver = new IntersectionObserver(
-            function (entries) {
-              entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                  entry.target.classList.add('is-in');
-                  revealObserver.unobserve(entry.target);
-                }
-              });
-            },
-            { threshold: 0.14, rootMargin: '0px 0px -6% 0px' }
-          );
-
-          revealEls.forEach(function (el) {
-            revealObserver.observe(el);
-          });
-        }
-      })();
-    </script>
+    <script src="./js/main.js"></script>
   </body>
 </html>

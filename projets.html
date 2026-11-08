@@ -4,6 +4,7 @@
     <script>
       try {
         if (localStorage.getItem("theme") === "light") document.documentElement.setAttribute("data-theme", "light");
+        else document.documentElement.removeAttribute("data-theme");
       } catch (e) {}
     </script>
     <meta charset="UTF-8" />

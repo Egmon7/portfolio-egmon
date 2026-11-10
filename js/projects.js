@@ -122,17 +122,41 @@
       github: "",
     },
     {
-      id: "raccourcisseur-url",
-      title: "Raccourcisseur d’URL",
-      summary: "Service pour raccourcir et partager des liens rapidement.",
-      points: ["Création d’un lien court", "Partage du lien généré"],
-      stack: ["AdonisJS", "TypeScript", "PostgreSQL"],
-      filter: "adonis",
-      image: "",
-      alt: "",
-      cover: false,
+      id: "egmon-weather",
+      title: "EgmonWeather",
+      summary:
+        "Application météo en 3D. On cherche une ville, le globe s’oriente vers elle, puis le ciel et les prévisions s’affichent.",
+      features: [
+        {
+          title: "Globe",
+          items: [
+            "Page d’accueil avec un ciel étoilé et une Terre qui tourne",
+            "Recherche de ville",
+            "Globe qui zoome sur la ville choisie",
+          ],
+        },
+        {
+          title: "Météo",
+          items: [
+            "Ciel 3D selon la météo : jour, nuit, nuages, pluie, neige",
+            "Panneau : température, ressenti, humidité, vent, lever et coucher du soleil, 24 heures et 7 jours",
+          ],
+        },
+        {
+          title: "Repères",
+          items: [
+            "Villes récentes et favoris conservés dans le navigateur",
+            "Position GPS, avec les coordonnées si aucun nom de ville n’est renvoyé",
+          ],
+        },
+      ],
+      stack: ["JavaScript", "Vite", "Three.js", "Tailwind CSS", "Open-Meteo"],
+      filter: "autres",
+      image: "./images/egmon-weather.png",
+      alt: "Aperçu d’EgmonWeather",
+      cover: true,
       status: "",
-      url: "",
+      url: "https://egmon7.github.io/egmon-weather/",
       github: "",
     },
   ];

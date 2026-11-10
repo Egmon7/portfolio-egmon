@@ -15,7 +15,7 @@ Portfolio de Prospere Engeba. Il rassemble mes idées de projets, avec pour chac
 - Génération des documents
 - Kadea Chat
 - NGL
-- Raccourcisseur d’URL
+- EgmonWeather
 
 Certaines sont en ligne, d’autres encore en développement. Le détail, la stack et les liens sont sur la fiche du projet.
 

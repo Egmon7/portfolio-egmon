@@ -159,6 +159,46 @@
       url: "https://egmon7.github.io/egmon-weather/",
       github: "",
     },
+    {
+      id: "jeu-chimie",
+      title: "Jeu chimie",
+      summary:
+        "Retrouvez le plaisir des heures d’école, quand une feuille quadrillée et deux stylos suffisaient. Fermez les carrés, et revivez ce moment.",
+      features: [
+        {
+          title: "Feuille",
+          items: [
+            "Page d’accueil sombre, sur un quadrillage fin",
+            "Créer une partie : solo, deux joueurs, en ligne ou libre",
+            "Cahier 17 × 22 ou cahier long 24 × 32, à la taille de l’écran",
+          ],
+        },
+        {
+          title: "Partie",
+          items: [
+            "Traits au clic, carrés fermés à la couleur du stylo",
+            "Temps du jeu : illimité, ou 5, 10, 15 et 20 minutes",
+            "Robot, pause, abandon et revanche",
+          ],
+        },
+        {
+          title: "Carnet",
+          items: [
+            "Historique, victoires et défaites gardés dans le navigateur",
+            "Salle en ligne avec un code à partager",
+            "Couleurs de stylo, thème du papier et objectif de score",
+          ],
+        },
+      ],
+      stack: ["JavaScript", "Canvas", "Node.js", "Express", "Socket.IO"],
+      filter: "autres",
+      image: "./images/jeu-chimie.png",
+      alt: "Aperçu de Jeu chimie",
+      cover: true,
+      status: "En développement",
+      url: "",
+      github: "",
+    },
   ];
 
   function esc(value) {

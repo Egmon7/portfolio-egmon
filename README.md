@@ -16,6 +16,7 @@ Portfolio de Prospere Engeba. Il rassemble mes idées de projets, avec pour chac
 - Kadea Chat
 - NGL
 - EgmonWeather
+- Jeu chimie
 
 Certaines sont en ligne, d’autres encore en développement. Le détail, la stack et les liens sont sur la fiche du projet.
 

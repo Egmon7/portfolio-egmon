@@ -477,8 +477,7 @@ body.menu-open {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: auto;
-  padding-top: 1rem;
+  margin-top: 0.85rem;
 }
 
 .project-card__actions {

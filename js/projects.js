@@ -196,7 +196,7 @@
       alt: "Aperçu de Jeu chimie",
       cover: true,
       status: "En développement",
-      url: "",
+      url: "https://jeu-chimie.prosperegmon.pro",
       github: "",
     },
   ];
